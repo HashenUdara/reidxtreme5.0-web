@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./Footer.module.css";
-import footerLogo from "../../ReidXtreme Web Assets/Logo_no_shadow_glowing.png";
+import footerLogo from "../../assets/Logo_no_shadow_glowing.png";
 
 export default function Footer() {
   return (
