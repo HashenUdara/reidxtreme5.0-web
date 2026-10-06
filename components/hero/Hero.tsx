@@ -4,7 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { MotionConfig } from "motion/react";
 import { HeroCopy } from "./HeroCopy";
 import { HeroMedia } from "./HeroMedia";
-import { STILL_CUES, VIDEO_CUES } from "./stages";
+import { ScrollCue } from "./ScrollCue";
+import { SoundToggle } from "./SoundToggle";
+import { STAGE, STILL_CUES, VIDEO_CUES } from "./stages";
 import { readMotionPreference, useMotionPreference } from "./useMotionPreference";
 
 // Give up on the video and show the still if it hasn't started by then.
@@ -16,9 +18,17 @@ export function Hero() {
   const [failed, setFailed] = useState(false);
   const [ended, setEnded] = useState(false);
   const [stage, setStage] = useState(0);
+  const [muted, setMuted] = useState(true);
 
   const staticMode = preference !== "full" || failed;
   const settled = ended || staticMode;
+
+  const toggleSound = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setMuted(video.muted);
+  };
 
   useEffect(() => {
     const video = videoRef.current;
@@ -80,6 +90,15 @@ export function Hero() {
       <section className="relative isolate h-svh min-h-[600px] overflow-hidden bg-bg [container-type:size]">
         <HeroMedia ref={videoRef} settled={settled} />
         <HeroCopy stage={stage} settled={settled} reduced={preference === "reduced"} />
+
+        <div className="absolute inset-x-0 bottom-0 mx-auto flex w-[min(92%,1400px)] items-end justify-between pb-6 md:pb-8">
+          <ScrollCue visible={stage >= STAGE.scrollCue} />
+          <SoundToggle
+            visible={!settled && stage >= STAGE.eyebrow}
+            muted={muted}
+            onToggle={toggleSound}
+          />
+        </div>
       </section>
     </MotionConfig>
   );
