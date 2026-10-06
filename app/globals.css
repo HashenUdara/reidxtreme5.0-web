@@ -1,26 +1,65 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Tokens from DESIGN.md §3 and §44. */
+@theme {
+  --color-mint: #8cf5bd;
+  --color-emerald: #3fb57f;
+  --color-body: #d6e4dc;
+  --color-muted: #a9c2b5;
+  --color-bg: #03080a;
+  --color-white: #f5faf7;
+  --color-panel: rgb(3 15 13 / 0.72);
+  --color-line: rgb(140 245 189 / 0.35);
+
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-draw: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-barlow-condensed), sans-serif;
+  --font-sans: var(--font-inter), sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Figma "Text Glow": drop shadows of 14px #6EE7A8 at 85% and 44px #3EB57F at 60%. */
+@utility text-glow {
+  text-shadow:
+    0 0 14px rgb(110 231 168 / 0.85),
+    0 0 44px rgb(62 181 127 / 0.6);
+}
+
+/* Figma "Soft Glow": drop shadow of 14px #6EE7A8 at 50%. */
+@utility soft-glow {
+  box-shadow: 0 0 14px rgb(110 231 168 / 0.5);
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-body);
+  }
+
+  ::selection {
+    background: rgb(140 245 189 / 0.3);
+    color: var(--color-white);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-mint);
+    outline-offset: 3px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
