@@ -2,7 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { MotionConfig } from "motion/react";
+import { HeroCopy } from "./HeroCopy";
 import { HeroMedia } from "./HeroMedia";
+import { STILL_CUES, VIDEO_CUES } from "./stages";
 import { readMotionPreference, useMotionPreference } from "./useMotionPreference";
 
 // Give up on the video and show the still if it hasn't started by then.
@@ -13,6 +15,7 @@ export function Hero() {
   const preference = useMotionPreference();
   const [failed, setFailed] = useState(false);
   const [ended, setEnded] = useState(false);
+  const [stage, setStage] = useState(0);
 
   const staticMode = preference !== "full" || failed;
   const settled = ended || staticMode;
@@ -48,17 +51,35 @@ export function Hero() {
     };
   }, []);
 
+  // Copy follows the video's clock, so it waits with the footage if playback stalls.
   useEffect(() => {
-    if (staticMode) videoRef.current?.pause();
+    const video = videoRef.current;
+    if (staticMode || !video) return;
+
+    let frame = 0;
+    const tick = () => {
+      const passed = VIDEO_CUES.filter((t) => video.currentTime >= t).length;
+      setStage((s) => Math.max(s, passed));
+      if (passed < VIDEO_CUES.length) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [staticMode]);
+
+  useEffect(() => {
+    if (!staticMode) return;
+    videoRef.current?.pause();
+    const timers = STILL_CUES.map((t, i) =>
+      window.setTimeout(() => setStage((s) => Math.max(s, i + 1)), t * 1000),
+    );
+    return () => timers.forEach(window.clearTimeout);
   }, [staticMode]);
 
   return (
     <MotionConfig reducedMotion="user">
-      <section
-        aria-label="REID XTREME 5.0"
-        className="relative isolate h-svh min-h-[600px] overflow-hidden bg-bg"
-      >
+      <section className="relative isolate h-svh min-h-[600px] overflow-hidden bg-bg [container-type:size]">
         <HeroMedia ref={videoRef} settled={settled} />
+        <HeroCopy stage={stage} settled={settled} reduced={preference === "reduced"} />
       </section>
     </MotionConfig>
   );

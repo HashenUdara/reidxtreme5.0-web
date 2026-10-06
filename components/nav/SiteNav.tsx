@@ -47,7 +47,7 @@ export function SiteNav() {
           : "border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 w-[min(92%,1400px)] items-center justify-between md:h-20">
+      <div className="mx-auto flex h-(--nav-h) w-[min(92%,1400px)] items-center justify-between">
         <Link href="/" className="-m-1 rounded-sm p-1">
           <Image
             src={logo}

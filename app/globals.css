@@ -20,11 +20,18 @@
   --font-sans: var(--font-inter), sans-serif;
 }
 
+/* Scales glow opacity; registered so it can be transitioned. */
+@property --glow {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
 /* Figma "Text Glow": drop shadows of 14px #6EE7A8 at 85% and 44px #3EB57F at 60%. */
 @utility text-glow {
   text-shadow:
-    0 0 14px rgb(110 231 168 / 0.85),
-    0 0 44px rgb(62 181 127 / 0.6);
+    0 0 14px rgb(110 231 168 / calc(0.85 * var(--glow))),
+    0 0 44px rgb(62 181 127 / calc(0.6 * var(--glow)));
 }
 
 /* Figma "Soft Glow": drop shadow of 14px #6EE7A8 at 50%. */
@@ -33,6 +40,14 @@
 }
 
 @layer base {
+  :root {
+    --nav-h: 4rem;
+
+    @media (width >= 48rem) {
+      --nav-h: 5rem;
+    }
+  }
+
   html {
     color-scheme: dark;
   }
