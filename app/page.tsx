@@ -1,4 +1,4 @@
-import RegistrationForm from "./components/RegistrationForm";
+import RegistrationForm from "../components/RegistrationForm";
 import styles from "./page.module.css";
 
 export default function Home() {
