@@ -176,7 +176,7 @@ function lookStyle({ status, lit, dim }: Look): CSSProperties {
 // reproduces the render. It also lets a connector and the end caps it
 // replaces cross-fade without a dark seam.
 const BRIDGE_PIECE =
-  "absolute max-w-none select-none mix-blend-plus-lighter transition-[opacity,filter,clip-path,translate] duration-[600ms,300ms,1200ms,1200ms] ease-[var(--ease-standard),var(--ease-standard),var(--ease-draw),var(--ease-draw)]";
+  "absolute max-w-none select-none mix-blend-plus-lighter transition-[opacity,filter,clip-path,translate] ease-[var(--ease-standard),var(--ease-standard),var(--ease-draw),var(--ease-draw)]";
 const CAP = "absolute max-w-none mix-blend-plus-lighter transition-opacity duration-500 ease-standard";
 
 export function Timeline() {
@@ -195,8 +195,9 @@ export function Timeline() {
   const revealed = reduced ? PHASES.length : inView;
   // Waiting to build: hidden only once JS is running to reveal it.
   const waiting = (k: number) => ready && revealed <= k;
-  // Connector k joins span k to span k + 1 once phase k is complete.
-  const joined = (k: number) => k < LAST && statusOf(k) === "complete" && revealed > k + 1;
+  // Connector k joins span k to span k + 1 once phase k is complete. It draws
+  // in as soon as span k builds, reaching ahead to where the next span will be.
+  const joined = (k: number) => k < LAST && statusOf(k) === "complete" && revealed > k;
   const lit = (k: number) => active !== null && k <= active;
   const dim = (k: number) => active !== null && k > active;
 
@@ -238,7 +239,11 @@ export function Timeline() {
           {PHASES.map((phase, k) => (
             <div
               key={phase.title}
-              className={cx(BRIDGE_PIECE, k % 2 === 1 && "-scale-x-100")}
+              className={cx(
+                BRIDGE_PIECE,
+                "duration-[600ms,300ms,1200ms,1200ms]",
+                k % 2 === 1 && "-scale-x-100",
+              )}
               style={{
                 ...boxStyle(place(SPAN_BOX, k), FRAME),
                 ...lookStyle({ status: statusOf(k), lit: lit(k), dim: dim(k) }),
@@ -264,7 +269,7 @@ export function Timeline() {
                 sizes={sizes(SPAN_START.w)}
                 alt=""
                 draggable={false}
-                className={cx(CAP, "delay-750", k > 0 && joined(k - 1) && "opacity-0")}
+                className={cx(CAP, "delay-600", k > 0 && joined(k - 1) && "opacity-0")}
                 style={boxStyle(SPAN_START, SPAN_BOX)}
               />
               <Image
@@ -274,7 +279,7 @@ export function Timeline() {
                 sizes={sizes(SPAN_END.w)}
                 alt=""
                 draggable={false}
-                className={cx(CAP, "delay-400", joined(k) && "opacity-0")}
+                className={cx(CAP, "delay-300", joined(k) && "opacity-0")}
                 style={boxStyle(SPAN_END, SPAN_BOX)}
               />
             </div>
@@ -290,7 +295,11 @@ export function Timeline() {
               alt=""
               draggable={false}
               // Wipes down from the end of one span to the start of the next.
-              className={cx(BRIDGE_PIECE, "delay-[0ms,0ms,400ms,0ms]", k % 2 === 1 && "-scale-x-100")}
+              className={cx(
+                BRIDGE_PIECE,
+                "delay-[0ms,0ms,300ms,0ms] duration-[600ms,300ms,900ms,1200ms]",
+                k % 2 === 1 && "-scale-x-100",
+              )}
               style={{
                 ...boxStyle(place(CONNECTOR, k), FRAME),
                 ...lookStyle({ lit: lit(k + 1), dim: dim(k + 1) }),
