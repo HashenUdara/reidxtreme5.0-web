@@ -10,15 +10,17 @@ export default function Home() {
   return (
     <>
       <SiteNav />
-      <main className="w-full flex-1">
+      <main className="w-full">
         <Hero />
-        <div className={`page-shell w-full ${styles.page || ""}`}>
+        <section className={styles.page}>
           <RegistrationForm />
-          <Prizes />
-          <SponsorsSection />
-        </div>
+        </section>
+        <Prizes />
+        <SponsorsSection />
       </main>
-      <Footer />
+      <div className="page-shell">
+        <Footer />
+      </div>
     </>
   );
 }
