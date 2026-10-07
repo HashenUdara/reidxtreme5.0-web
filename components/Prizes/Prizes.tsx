@@ -214,7 +214,7 @@ export default function Prizes() {
   }, []);
 
   return (
-    <main className={styles.page}>
+    <div className={styles.page}>
       <section
         id="prizes"
         aria-labelledby="prizes-title"
@@ -223,9 +223,9 @@ export default function Prizes() {
       >
         <header className={styles.header}>
           <p className={styles.eyebrow}>PRIZE POOL</p>
-          <h1 className={styles.title} id="prizes-title">
+          <h2 className={styles.title} id="prizes-title">
             WHAT WAITS ON THE OTHER SIDE
-          </h1>
+          </h2>
           <p className={styles.subtitle}>
             Cross the gap. Build what&apos;s next. Claim your share.
           </p>
@@ -244,6 +244,6 @@ export default function Prizes() {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 }

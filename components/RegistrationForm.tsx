@@ -121,9 +121,9 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
 
   return (
     <section id="registration" className={styles.section} aria-labelledby={`${id}-heading`}>
-      <h1 className={styles.sectionTitle} id={`${id}-heading`}>
+      <h2 className={styles.sectionTitle} id={`${id}-heading`}>
         REGISTRATION FORM:
-      </h1>
+      </h2>
 
       <div className={styles.panel}>
         <div className={styles.badge}>PROJECT PROPOSAL HOLOGRAM</div>
