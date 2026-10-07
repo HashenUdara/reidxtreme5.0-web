@@ -4,7 +4,7 @@ import footerLogo from "../assets/Logo_no_shadow_glowing.png";
 
 export default function Footer() {
   return (
-    <footer id="top" className={styles.footer} aria-labelledby="footer-brand">
+    <footer className={styles.footer} aria-labelledby="footer-brand">
       <div className={styles.topline} aria-hidden="true">
         <span className={styles.statusIndicator} />
         <span>ENGINEERING THE EXTRAORDINARY</span>
