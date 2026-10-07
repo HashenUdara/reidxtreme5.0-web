@@ -8,7 +8,7 @@
     linear-gradient(rgba(140, 245, 189, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(140, 245, 189, 0.035) 1px, transparent 1px),
     radial-gradient(ellipse at 50% 0%, rgba(36, 117, 82, 0.16), transparent 42rem);
-  background-size: 42px 42px, 42px 42px, auto;
+  background-size: 40px 40px, 40px 40px, auto;
 }
 
 @media (max-width: 560px) {
