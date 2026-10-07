@@ -45,6 +45,7 @@
 @theme inline {
   --font-display: var(--font-barlow-condensed), sans-serif;
   --font-sans: var(--font-inter), sans-serif;
+  --color-background: #03080a;
 }
 
 /* Scales glow opacity; registered so it can be transitioned. */
@@ -69,19 +70,38 @@
 @layer base {
   :root {
     --nav-h: 4rem;
+    --background: #03080a;
+    --footer-panel: rgba(3, 15, 13, 0.72);
+    --footer-border: rgba(140, 245, 189, 0.35);
+    --footer-mint: #8cf5bd;
+    --footer-emerald: #3fb57f;
+    --footer-text: #d6e4dc;
+    --footer-muted: #a9c2b5;
+    --footer-white: #f5faf7;
 
     @media (width >= 48rem) {
       --nav-h: 5rem;
     }
   }
 
+  * {
+    box-sizing: border-box;
+  }
+
   html {
     color-scheme: dark;
+    width: 100%;
   }
 
   body {
     background: var(--color-bg);
     color: var(--color-body);
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
@@ -156,6 +176,25 @@
       transform: translateY(0);
     }
   }
+
+  .page-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    padding: clamp(1rem, 5vw, 4.5rem);
+    background:
+      radial-gradient(ellipse at 14% 90%, rgba(20, 103, 68, 0.13), transparent 36rem),
+      radial-gradient(ellipse at 90% 10%, rgba(31, 104, 81, 0.11), transparent 32rem),
+      var(--color-bg);
+  }
+
+  @media (max-width: 768px) {
+    .page-shell {
+      align-items: center;
+      padding: 1rem;
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -166,5 +205,8 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  html {
+    scroll-behavior: auto;
   }
 }

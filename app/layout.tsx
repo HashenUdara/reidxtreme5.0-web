@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import type { ReactNode } from "react";
 import { Barlow_Condensed, Inter } from "next/font/google";
 import "./globals.css";
 
@@ -6,11 +7,14 @@ const barlowCondensed = Barlow_Condensed({
   variable: "--font-barlow-condensed",
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
+  display: "swap",
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -23,7 +27,7 @@ export const viewport: Viewport = {
   themeColor: "#03080a",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
