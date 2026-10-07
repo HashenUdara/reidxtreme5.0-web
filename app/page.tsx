@@ -20,8 +20,7 @@ export default function Home() {
           <RegistrationForm />
         </div>
       </main>
-      {/* No bottom padding: the page ends at the footer's edge. */}
-      <div className="px-4 pt-4 md:px-[clamp(1rem,5vw,4.5rem)] md:pt-[clamp(1rem,5vw,4.5rem)]">
+      <div className="p-4 md:p-[clamp(1rem,5vw,4.5rem)]">
         <Footer />
       </div>
     </>
