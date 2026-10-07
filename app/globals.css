@@ -152,8 +152,14 @@
       color: var(--color-white);
     }
 
-    &:hover::after {
+    &:hover::after,
+    &[aria-current]::after {
       transform: scaleX(1);
+    }
+
+    /* The section in view (§17). */
+    &[aria-current] {
+      color: var(--color-mint);
     }
   }
 

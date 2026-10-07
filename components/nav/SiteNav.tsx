@@ -11,13 +11,43 @@ import {
 } from "motion/react";
 import logo from "@/assets/Logo_no_shadow_glowing.png";
 
-const LINKS = [{ href: "#timeline", label: "Timeline" }];
+const LINKS = [
+  { id: "timeline", label: "Timeline" },
+  { id: "prizes", label: "Prizes" },
+  { id: "sponsors", label: "Sponsors" },
+];
 const REGISTER = { href: "#registration", label: "Connect & Register" };
+const SECTION_IDS = LINKS.map((link) => link.id);
+
+/** The linked section crossing the middle of the viewport, if any (§17). */
+function useActiveSection(ids: string[]) {
+  const [active, setActive] = useState<string | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const id = entry.target.id;
+          setActive((a) => (entry.isIntersecting ? id : a === id ? null : a));
+        }
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    for (const id of ids) {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    }
+    return () => observer.disconnect();
+  }, [ids]);
+
+  return active;
+}
 
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { scrollY } = useScroll();
+  const active = useActiveSection(SECTION_IDS);
 
   useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 24));
 
@@ -60,7 +90,12 @@ export function SiteNav() {
 
         <nav aria-label="Primary" className="hidden items-center gap-10 md:flex">
           {LINKS.map((link) => (
-            <a key={link.href} href={link.href} className="nav-link">
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              aria-current={active === link.id ? "true" : undefined}
+              className="nav-link"
+            >
               {link.label}
             </a>
           ))}
@@ -106,8 +141,9 @@ export function SiteNav() {
             <div className="mx-auto flex w-[min(92%,1400px)] flex-col gap-1 py-4">
               {LINKS.map((link) => (
                 <a
-                  key={link.href}
-                  href={link.href}
+                  key={link.id}
+                  href={`#${link.id}`}
+                  aria-current={active === link.id ? "true" : undefined}
                   onClick={() => setOpen(false)}
                   className="nav-link py-3"
                 >
