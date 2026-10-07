@@ -32,24 +32,6 @@ export default function Footer() {
         </section>
 
         <nav className={styles.navigation} aria-label="Footer navigation">
-          <section className={styles.linkGroup} aria-labelledby="organizers-heading">
-            <h2 id="organizers-heading">ORGANIZERS</h2>
-            <ul>
-              <li>
-                <a className={styles.organizerAbout} href="#about-reid-xtreme">
-                  <span className={styles.organizerLabel}>About</span>
-                  <span className={styles.brandWord}>ReidXTREME</span>
-                </a>
-              </li>
-              <li>
-                <a className={styles.organizingCommittee} href="#organizing-committee">
-                  <span>Organizing</span>
-                  <span>Committee</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-
           <section className={styles.linkGroup} aria-labelledby="contact-heading">
             <h2 id="contact-heading">CONTACT</h2>
             <ul>

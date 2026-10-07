@@ -116,7 +116,7 @@
 
 .navigation {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1.25rem, 3vw, 3rem);
   padding-top: 0.4rem;
 }
@@ -160,36 +160,6 @@
 .linkGroup a span {
   color: var(--footer-emerald);
   font-size: 0.72rem;
-}
-
-.linkGroup a .brandWord {
-  color: inherit;
-  font-size: inherit;
-  white-space: nowrap;
-}
-
-.organizerAbout {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0;
-}
-
-.organizingCommittee {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0;
-}
-
-.linkGroup a.organizingCommittee span {
-  color: inherit;
-  font-size: inherit;
-  white-space: nowrap;
-}
-
-.linkGroup a .organizerLabel {
-  color: inherit;
-  font-size: inherit;
-  white-space: nowrap;
 }
 
 .linkGroup a:hover,
@@ -255,14 +225,6 @@
 
   .linkGroup ul {
     justify-items: center;
-  }
-
-  .organizerAbout {
-    align-items: center;
-  }
-
-  .organizingCommittee {
-    align-items: center;
   }
 
   .topline,
