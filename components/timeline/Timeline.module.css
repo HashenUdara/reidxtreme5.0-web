@@ -1,0 +1,312 @@
+/* DESIGN.md §23: the timeline is the bridge itself, one span per phase. */
+.section {
+  scroll-margin-top: var(--nav-h);
+  padding: clamp(4.5rem, 10vw, 8rem) clamp(0.25rem, 3vw, 1.5rem);
+}
+
+/* Same header treatment as the prize pool (§22). */
+.header {
+  max-width: 56rem;
+  margin: 0 auto clamp(1.25rem, 3vw, 2rem);
+  padding-inline: 1rem;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 0.9rem;
+  color: var(--color-mint);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5.25rem);
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  line-height: 0.98;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.subtitle {
+  margin: 1rem 0 0;
+  color: var(--color-muted);
+  font-family: var(--font-sans);
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  line-height: 1.6;
+}
+
+.divider {
+  width: min(100%, 38rem);
+  height: 1px;
+  margin: clamp(1.5rem, 4vw, 2.5rem) auto 0;
+  background: linear-gradient(90deg, transparent, rgb(140 245 189 / 0.35), transparent);
+}
+
+/* Everything inside is placed in percentages of this box, and type scales
+   with its width so the copy keeps its place beside each span. */
+.stack {
+  position: relative;
+  width: min(100%, 60rem);
+  margin-inline: auto;
+  container-type: inline-size;
+}
+
+/* The pieces are light on transparent, stored so that adding them reproduces
+   the render. Additive blending also lets a connector and the end caps it
+   replaces cross-fade without a dark seam. */
+.bridges {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+  pointer-events: none;
+}
+
+.span,
+.connector {
+  --saturate: 1;
+  --brightness: 1;
+  --glow: 0;
+  --status-opacity: 1;
+  --path-opacity: 1;
+
+  position: absolute;
+  max-width: none;
+  mix-blend-mode: plus-lighter;
+  opacity: calc(var(--status-opacity) * var(--path-opacity));
+  filter: saturate(var(--saturate)) brightness(var(--brightness))
+    drop-shadow(0 0 1.1cqi rgb(140 245 189 / var(--glow)));
+  user-select: none;
+  transition:
+    opacity 600ms var(--ease-standard),
+    filter 300ms var(--ease-standard),
+    clip-path 1200ms var(--ease-draw),
+    translate 1200ms var(--ease-draw);
+}
+
+.span[data-flip],
+.connector[data-flip] {
+  transform: scaleX(-1);
+}
+
+.piece {
+  position: absolute;
+  max-width: none;
+  mix-blend-mode: plus-lighter;
+  transition: opacity 500ms var(--ease-standard) 400ms;
+}
+
+.piece[data-hidden] {
+  opacity: 0;
+}
+
+/* The connector wipes in from the upper span, so the lower span's cap goes last. */
+.startCap {
+  transition-delay: 750ms;
+}
+
+/* Phase not reached yet: a faint, desaturated outline of the route. */
+.span[data-status="upcoming"] {
+  --saturate: 0.35;
+  --brightness: 0.85;
+  --status-opacity: 0.35;
+}
+
+/* Hovering or focusing a phase lights the path from the start up to it. */
+.span[data-lit],
+.connector[data-lit] {
+  --brightness: 1.35;
+  --glow: 0.55;
+}
+
+.span[data-status="upcoming"][data-lit] {
+  --saturate: 0.8;
+  --status-opacity: 0.75;
+}
+
+.span[data-dim],
+.connector[data-dim] {
+  --path-opacity: 0.45;
+}
+
+/* Construction (§10, §21): a span extends along its direction of travel as it
+   scrolls in. Flipped spans mirror the wipe, so they extend right to left. */
+.section[data-ready] .span:not([data-shown]) {
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  translate: 0 2cqi;
+}
+
+/* A connector wipes down from the end of one span to the start of the next. */
+.connector {
+  clip-path: inset(0);
+  transition-delay: 0ms, 0ms, 400ms, 0ms;
+}
+
+.connector:not([data-shown]) {
+  clip-path: inset(0 0 100% 0);
+}
+
+.hits {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.hits polygon {
+  fill: transparent;
+  pointer-events: fill;
+}
+
+.phases {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+
+.phase {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  border-radius: 4px;
+  outline-offset: 0.6rem;
+  text-align: right;
+  pointer-events: auto;
+  transition:
+    opacity 900ms var(--ease-standard),
+    translate 900ms var(--ease-draw);
+}
+
+.phase[data-side="left"] {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.section[data-ready] .phase:not([data-shown]) {
+  opacity: 0;
+  translate: 0 1rem;
+}
+
+.phase[data-dim] {
+  opacity: 0.55;
+}
+
+/* On narrow screens the status drops below the phase number rather than
+   breaking either label. */
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.2em 0.75em;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(0.625rem, 1.15cqi, 0.75rem);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.phase[data-side="left"] .meta {
+  justify-content: flex-start;
+}
+
+.number {
+  color: var(--color-mint);
+  white-space: nowrap;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.status::before {
+  width: 1.25em;
+  height: 1px;
+  background: currentColor;
+  content: "";
+  opacity: 0.6;
+}
+
+.phase[data-status="active"] .status {
+  color: var(--color-mint);
+}
+
+.phase[data-status="active"] .status::before {
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgb(140 245 189 / 0.8);
+  opacity: 1;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+.phaseTitle {
+  margin: 0.4em 0 0;
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3.6cqi, 2.4rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  transition:
+    color 300ms var(--ease-standard),
+    text-shadow 300ms var(--ease-standard);
+}
+
+.phase[data-status="upcoming"] .phaseTitle {
+  color: var(--color-body);
+}
+
+.phase[data-lit] .phaseTitle {
+  color: var(--color-mint);
+  text-shadow:
+    0 0 14px rgb(110 231 168 / 0.85),
+    0 0 44px rgb(62 181 127 / 0.6);
+}
+
+.date {
+  margin-top: 0.35em;
+  color: var(--color-mint);
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 1.8cqi, 1.2rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+}
+
+.summary {
+  max-width: 30ch;
+  margin: 0.5em 0 0;
+  color: var(--color-muted);
+  font-family: var(--font-sans);
+  font-size: clamp(0.75rem, 1.5cqi, 0.95rem);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
