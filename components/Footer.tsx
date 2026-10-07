@@ -1,5 +1,7 @@
 import Image from "next/image";
 import footerLogo from "@/assets/Logo_no_shadow_glowing.png";
+import acmLogo from "@/assets/ACM.png";
+import ieeeLogo from "@/assets/IEEE.png";
 import { cx } from "@/lib/cx";
 
 const BAR =
@@ -9,7 +11,27 @@ const LINK_HEADING = "m-0 mb-[1.35rem] font-display text-base font-semibold trac
 const LINK_LIST = "m-0 grid list-none justify-items-center gap-[0.9rem] p-0 md:justify-items-start";
 const LINK =
   "inline-flex max-w-full items-center gap-[0.35rem] text-[0.82rem] leading-normal [overflow-wrap:anywhere] text-muted no-underline transition-transform duration-200 ease-standard hover:-translate-y-0.5 hover:text-mint hover:[text-shadow:0_0_14px_rgb(140_245_189/0.5)] focus-visible:-translate-y-0.5 focus-visible:text-mint";
-const EXTERNAL = <span aria-hidden="true" className="text-[0.72rem] text-emerald">↗</span>;
+const SOCIALS = [
+  {
+    id: "ieee",
+    heading: "IEEE SB UCSC",
+    links: [
+      { label: "Facebook", href: "https://www.facebook.com/IEEE.UCSC/" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/company/ucscieeesb/" },
+      { label: "Instagram", href: "https://www.instagram.com/ucsc.ieee/" },
+    ],
+  },
+  {
+    id: "acm",
+    heading: "ACM UCSC",
+    links: [
+      { label: "Facebook", href: "https://www.facebook.com/share/14jTrd2BJoH" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/company/ucscacmstudentchapter" },
+      { label: "Instagram", href: "https://www.instagram.com/ucsc.acm" },
+    ],
+  },
+];
+const EXTERNAL =<span aria-hidden="true" className="text-[0.72rem] text-emerald">↗</span>;
 
 export default function Footer() {
   return (
@@ -41,11 +63,6 @@ export default function Footer() {
             alt="ReidXTREME 5.0"
             sizes="220px"
           />
-          <p className="m-0 font-display text-[clamp(1.45rem,2.8vw,2rem)] leading-[1.22] font-semibold tracking-[0.075em] text-body">
-            CROSS THE <span className="text-mint">CHASM.</span>
-            <br />
-            BRIDGE THE HORIZONS.
-          </p>
           <span className="text-[0.62rem] font-medium tracking-[0.11em] text-muted">
             COLOMBO, SRI LANKA{" "}
             <span aria-hidden="true" className="px-[0.35rem] text-emerald">
@@ -61,7 +78,7 @@ export default function Footer() {
         </section>
 
         <nav
-          className="grid grid-cols-1 gap-8 pt-[0.4rem] md:grid-cols-2 md:gap-[clamp(1.25rem,3vw,3rem)]"
+          className="grid grid-cols-1 gap-8 pt-[0.4rem] sm:grid-cols-3 md:gap-[clamp(1.25rem,3vw,3rem)]"
           aria-label="Footer navigation"
         >
           <section className={LINK_GROUP} aria-labelledby="contact-heading">
@@ -85,37 +102,27 @@ export default function Footer() {
             </ul>
           </section>
 
-          <section className={LINK_GROUP} aria-labelledby="social-heading">
-            <h2 className={LINK_HEADING} id="social-heading">
-              SOCIAL LINKS
-            </h2>
-            {/* Placeholders until the event accounts are connected. */}
-            <ul className={LINK_LIST}>
-              <li>
-                <a className={LINK} href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-                  Instagram {EXTERNAL}
-                </a>
-              </li>
-              <li>
-                <a className={LINK} href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-                  Facebook {EXTERNAL}
-                </a>
-              </li>
-              <li>
-                <a className={LINK} href="https://www.whatsapp.com/" target="_blank" rel="noopener noreferrer">
-                  WhatsApp {EXTERNAL}
-                </a>
-              </li>
-            </ul>
-          </section>
+          {SOCIALS.map((group) => (
+            <section className={LINK_GROUP} aria-labelledby={`${group.id}-heading`} key={group.id}>
+              <h2 className={LINK_HEADING} id={`${group.id}-heading`}>
+                {group.heading}
+              </h2>
+              <ul className={LINK_LIST}>
+                {group.links.map((link) => (
+                  <li key={link.label}>
+                    <a className={LINK} href={link.href} target="_blank" rel="noopener noreferrer">
+                      {link.label} {EXTERNAL}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
         </nav>
       </div>
 
       <div className={cx(BAR, "min-h-15 border-t border-mint/20 max-sm:min-h-14 max-sm:gap-x-5 max-sm:gap-y-3")}>
         <span>© 2026 REID XTREME</span>
-        <span className="text-center text-muted/68 max-sm:hidden">
-          CROSS THE CHASM. BRIDGE THE HORIZONS.
-        </span>
         <a
           className="inline-flex items-center gap-[0.55rem] text-body no-underline transition-transform duration-200 ease-standard hover:-translate-y-0.5 hover:text-mint hover:[text-shadow:0_0_14px_rgb(140_245_189/0.5)] focus-visible:-translate-y-0.5 focus-visible:text-mint"
           href="#top"
