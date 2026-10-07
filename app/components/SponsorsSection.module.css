@@ -31,12 +31,9 @@
 .header {
   position: relative;
   z-index: 1;
-  display: flex;
   width: min(100% - 3rem, 87.5rem);
-  align-items: end;
-  justify-content: space-between;
-  gap: 1.5rem;
   margin: 0 auto clamp(2rem, 5vw, 4rem);
+  text-align: center;
 }
 
 .eyebrow,
