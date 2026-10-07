@@ -15,7 +15,7 @@ export type Phase = {
 };
 
 export const PHASES: Phase[] = [
-  { title: "Workshop 1" },
+  { title: "Workshop 1", status: "complete" },
   { title: "Workshop 2" },
   { title: "Workshop 3" },
   { title: "Initial Round" },
