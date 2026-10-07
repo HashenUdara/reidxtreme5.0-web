@@ -67,6 +67,28 @@
   box-shadow: 0 0 14px rgb(110 231 168 / 0.5);
 }
 
+/* Entrance keyframes. Each runs from these values to the element's own, so
+   callers set duration and delay, e.g. animate-[rise-in_450ms_ease_both]. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+/* For SVG strokes with pathLength="1" and stroke-dasharray: 1. */
+@keyframes draw-line {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
 @layer base {
   :root {
     --nav-h: 4rem;
