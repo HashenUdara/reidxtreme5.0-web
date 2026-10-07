@@ -11,6 +11,9 @@
   --color-panel: rgb(3 15 13 / 0.72);
   --color-line: rgb(140 245 189 / 0.35);
 
+  /* DESIGN.md §37 content width. */
+  --container-page: 87.5rem;
+
   --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-draw: cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -53,7 +56,6 @@
 @theme inline {
   --font-display: var(--font-barlow-condensed), sans-serif;
   --font-sans: var(--font-inter), sans-serif;
-  --color-background: #03080a;
 }
 
 /* Scales glow opacity; registered so it can be transitioned. */
@@ -108,39 +110,10 @@
 @layer base {
   :root {
     --nav-h: 4rem;
-    --background: #03080a;
-    --footer-panel: rgba(3, 15, 13, 0.72);
-    --footer-border: rgba(140, 245, 189, 0.35);
-    --footer-mint: #8cf5bd;
-    --footer-emerald: #3fb57f;
-    --footer-text: #d6e4dc;
-    --footer-muted: #a9c2b5;
-    --footer-white: #f5faf7;
-
-    /* Remaining DESIGN.md §44 tokens. Colours, fonts and easing live in @theme. */
-    --container: 1400px;
-    --radius-sm: 4px;
-    --radius-md: 6px;
-    --radius-lg: 8px;
-    --radius-xl: 12px;
-    --border-default: rgb(140 245 189 / 0.35);
-    --border-active: #8cf5bd;
-    --glow-small: 0 0 14px rgb(110 231 168 / 0.5);
-    --glow-text:
-      0 0 14px rgb(110 231 168 / 0.85),
-      0 0 44px rgb(62 181 127 / 0.6);
-    --duration-fast: 150ms;
-    --duration-standard: 300ms;
-    --duration-slow: 600ms;
-    --duration-cinematic: 1200ms;
 
     @media (width >= 48rem) {
       --nav-h: 5rem;
     }
-  }
-
-  * {
-    box-sizing: border-box;
   }
 
   html {
@@ -155,16 +128,12 @@
   }
 
   body {
+    @apply bg-grid;
     background-color: var(--color-bg);
-    background-image:
-      linear-gradient(rgba(140, 245, 189, 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(140, 245, 189, 0.035) 1px, transparent 1px);
-    background-size: 40px 40px;
     background-attachment: fixed;
     color: var(--color-body);
     width: 100%;
     min-height: 100vh;
-    margin: 0;
     overflow-x: clip;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -248,7 +217,6 @@
       transform: translateY(0);
     }
   }
-
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -259,8 +227,5 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-  html {
-    scroll-behavior: auto;
   }
 }

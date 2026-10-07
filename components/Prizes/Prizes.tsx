@@ -205,7 +205,7 @@ export default function Prizes() {
       <section
         id="prizes"
         aria-labelledby="prizes-title"
-        className="mx-auto w-full max-w-(--container)"
+        className="mx-auto w-full max-w-page"
         ref={sectionRef}
       >
         <SectionHeader

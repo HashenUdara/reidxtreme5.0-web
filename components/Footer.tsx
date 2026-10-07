@@ -29,7 +29,7 @@ export default function Footer() {
         <span className="text-muted/70">RX—05 / 2026</span>
       </div>
 
-      <div className="mx-auto grid w-full max-w-350 grid-cols-1 gap-11 px-6 py-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,2fr)] md:gap-[clamp(2.5rem,6vw,5rem)] md:py-[clamp(3rem,5vw,4rem)]">
+      <div className="mx-auto grid w-full max-w-page grid-cols-1 gap-11 px-6 py-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,2fr)] md:gap-[clamp(2.5rem,6vw,5rem)] md:py-[clamp(3rem,5vw,4rem)]">
         <section
           className="flex flex-col items-center gap-3 text-center md:items-start md:text-left"
           aria-label="ReidXTREME 5.0"

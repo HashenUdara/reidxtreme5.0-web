@@ -77,7 +77,7 @@ export function SiteNav() {
           : "border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-(--nav-h) w-[min(92%,1400px)] items-center justify-between">
+      <div className="mx-auto flex h-(--nav-h) w-[min(92%,var(--container-page))] items-center justify-between">
         <Link href="/" className="-m-1 rounded-sm p-1">
           <Image
             src={logo}
@@ -138,7 +138,7 @@ export function SiteNav() {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="border-t border-mint/10 md:hidden"
           >
-            <div className="mx-auto flex w-[min(92%,1400px)] flex-col gap-1 py-4">
+            <div className="mx-auto flex w-[min(92%,var(--container-page))] flex-col gap-1 py-4">
               {LINKS.map((link) => (
                 <a
                   key={link.id}
