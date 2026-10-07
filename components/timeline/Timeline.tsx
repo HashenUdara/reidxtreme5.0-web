@@ -5,12 +5,12 @@ import {
   useEffect,
   useRef,
   useState,
-  useSyncExternalStore,
   type CSSProperties,
   type PointerEvent,
   type RefObject,
 } from "react";
-import { useMotionPreference } from "@/components/hero/useMotionPreference";
+import { useHydrated } from "@/hooks/useHydrated";
+import { useMotionPreference } from "@/hooks/useMotionPreference";
 import {
   CONNECTOR,
   FRAME_WIDTH,
@@ -120,16 +120,6 @@ const STATUS_LABEL: Record<PhaseStatus, string> = {
   active: "In progress",
   upcoming: "Upcoming",
 };
-
-// False on the server and during hydration, true after. Spans only hide for
-// the scroll reveal once JS is running to reveal them.
-const subscribeNever = () => () => {};
-const useHydrated = () =>
-  useSyncExternalStore(
-    subscribeNever,
-    () => true,
-    () => false,
-  );
 
 /**
  * How many of the container's children, counted from the first, have

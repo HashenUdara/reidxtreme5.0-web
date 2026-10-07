@@ -1,12 +1,10 @@
 "use client";
 
-import {
-  useEffect,
-  useRef,
-  useState,
-  useSyncExternalStore,
-} from "react";
-import type { CSSProperties, RefObject } from "react";
+import { useInView } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import type { CSSProperties } from "react";
+import { useHydrated } from "@/hooks/useHydrated";
+import { useMotionPreference } from "@/hooks/useMotionPreference";
 import styles from "./Prizes.module.css";
 
 type Prize = { place: 1 | 2 | 3; label: string; amount: number };
@@ -22,50 +20,6 @@ const STAGGER_INDEX: Record<Prize["place"], number> = {
   2: 1,
   3: 2,
 };
-
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-
-function subscribeToMotionPreference(onChange: () => void) {
-  const query = window.matchMedia(REDUCED_MOTION_QUERY);
-  query.addEventListener("change", onChange);
-  return () => query.removeEventListener("change", onChange);
-}
-
-function getMotionPreference() {
-  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
-}
-
-type InViewOptions = { threshold: number; once: boolean };
-
-// Design system sections 10, 19, and 20: reveal the built structure once.
-function useInView<T extends Element>(
-  ref: RefObject<T | null>,
-  { threshold, once }: InViewOptions,
-  reducedMotion: boolean,
-) {
-  const [isInView, setIsInView] = useState(false);
-
-  useEffect(() => {
-    if (reducedMotion) return;
-
-    const element = ref.current;
-    if (!element) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        setIsInView(true);
-        if (once) observer.unobserve(entry.target);
-      },
-      { threshold },
-    );
-    observer.observe(element);
-
-    return () => observer.disconnect();
-  }, [once, reducedMotion, ref, threshold]);
-
-  return isInView;
-}
 
 // Design system sections 10, 19, and 34: count once, or show the final value for reduced motion.
 function useCountUp(
@@ -196,22 +150,9 @@ function PrizeCard({
 
 export default function Prizes() {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const [hasMounted, setHasMounted] = useState(false);
-  const reducedMotion = useSyncExternalStore(
-    subscribeToMotionPreference,
-    getMotionPreference,
-    () => false,
-  );
-  const isVisible = useInView(
-    sectionRef,
-    { threshold: 0.25, once: true },
-    reducedMotion,
-  );
-
-  useEffect(() => {
-    const frame = window.requestAnimationFrame(() => setHasMounted(true));
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
+  const hasMounted = useHydrated();
+  const reducedMotion = useMotionPreference() === "reduced";
+  const isVisible = useInView(sectionRef, { once: true, amount: 0.25 });
 
   return (
     <div className={styles.page}>

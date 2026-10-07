@@ -7,7 +7,7 @@ import { HeroMedia } from "./HeroMedia";
 import { ScrollCue } from "./ScrollCue";
 import { SoundToggle } from "./SoundToggle";
 import { STAGE, STILL_CUES, VIDEO_CUES } from "./stages";
-import { readMotionPreference, useMotionPreference } from "./useMotionPreference";
+import { readMotionPreference, useMotionPreference } from "@/hooks/useMotionPreference";
 
 // Give up on the video and show the still if it hasn't started by then.
 const START_TIMEOUT_MS = 3000;
