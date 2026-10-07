@@ -37,11 +37,7 @@ const SPONSORS: Sponsor[] = [
 ];
 
 export default function SponsorsSection() {
-  const [isPointerInside, setIsPointerInside] = useState(false);
-  const isPaused = isPointerInside;
-  const status = isPaused
-    ? "[ AUTOSCROLL: PAUSED (MOVE CURSOR AWAY TO RESUME) ]"
-    : "[ AUTOSCROLL: ACTIVE ]";
+  const [isPaused, setIsPaused] = useState(false);
 
   function renderCards(copy: "primary" | "duplicate" | "duplicateTwo") {
     return SPONSORS.map((sponsor) => (
@@ -83,24 +79,19 @@ export default function SponsorsSection() {
   return (
     <section id="sponsors" className={styles.section} aria-labelledby="sponsors-heading">
       <div className={styles.header}>
-        <div>
-          <p className={styles.eyebrow}>06 / ARCHITECTS &amp; PARTNERS</p>
-          <h2 className={styles.title} id="sponsors-heading">
-            EVENT SPONSORS
-          </h2>
-          <p className={styles.subtitle}>
-            PROUDLY PARTNERING WITH HIVEION, ZONE24X7 &amp; SPERA.
-          </p>
-        </div>
-        <p aria-live="polite" className={styles.status}>
-          {status}
+        <p className={styles.eyebrow}>ARCHITECTS &amp; PARTNERS</p>
+        <h2 className={styles.title} id="sponsors-heading">
+          EVENT SPONSORS
+        </h2>
+        <p className={styles.subtitle}>
+          PROUDLY PARTNERING WITH HIVEION, ZONE24X7 &amp; SPERA.
         </p>
       </div>
 
       <div
         className={styles.viewport}
-        onMouseEnter={() => setIsPointerInside(true)}
-        onMouseLeave={() => setIsPointerInside(false)}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
       >
         <div className={`${styles.track} ${isPaused ? styles.trackPaused : ""}`}>
           <div className={styles.trackGroup}>{renderCards("primary")}</div>
