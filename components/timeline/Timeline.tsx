@@ -10,7 +10,7 @@ import {
   type PointerEvent,
   type RefObject,
 } from "react";
-import { useMotionPreference } from "../hero/useMotionPreference";
+import { useMotionPreference } from "@/components/hero/useMotionPreference";
 import {
   CONNECTOR,
   FRAME_WIDTH,
