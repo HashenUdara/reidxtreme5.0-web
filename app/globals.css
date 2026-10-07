@@ -16,6 +16,7 @@
 
   --animate-scroll-cue: scroll-cue 2.4s var(--ease-draw) infinite;
   --animate-sound-bar: sound-bar 0.9s ease-in-out infinite;
+  --animate-marquee: marquee 28s linear infinite;
 
   @keyframes scroll-cue {
     0% {
@@ -28,6 +29,13 @@
     100% {
       transform: translateY(400%);
       opacity: 0;
+    }
+  }
+
+  /* Moves one of three identical card groups, so the loop is seamless. */
+  @keyframes marquee {
+    to {
+      transform: translateX(-33.333333%);
     }
   }
 
@@ -60,6 +68,14 @@
   text-shadow:
     0 0 14px rgb(110 231 168 / calc(0.85 * var(--glow))),
     0 0 44px rgb(62 181 127 / calc(0.6 * var(--glow)));
+}
+
+/* DESIGN.md §29 technical grid. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(rgb(140 245 189 / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(140 245 189 / 0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
 /* Figma "Soft Glow": drop shadow of 14px #6EE7A8 at 50%. */

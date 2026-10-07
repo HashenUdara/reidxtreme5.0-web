@@ -1,9 +1,11 @@
+import type { ReactNode } from "react";
+
 type SectionHeaderProps = {
   /** Id for the heading, so the section can point aria-labelledby at it. */
   id: string;
   title: string;
   eyebrow?: string;
-  subtitle?: string;
+  subtitle?: ReactNode;
   className?: string;
 };
 
