@@ -94,7 +94,12 @@
   }
 
   body {
-    background: var(--color-bg);
+    background-color: var(--color-bg);
+    background-image:
+      linear-gradient(rgba(140, 245, 189, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(140, 245, 189, 0.035) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-attachment: fixed;
     color: var(--color-body);
     width: 100%;
     min-height: 100vh;
