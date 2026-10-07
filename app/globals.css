@@ -79,6 +79,23 @@
     --footer-muted: #a9c2b5;
     --footer-white: #f5faf7;
 
+    /* Remaining DESIGN.md §44 tokens. Colours, fonts and easing live in @theme. */
+    --container: 1400px;
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+    --border-default: rgb(140 245 189 / 0.35);
+    --border-active: #8cf5bd;
+    --glow-small: 0 0 14px rgb(110 231 168 / 0.5);
+    --glow-text:
+      0 0 14px rgb(110 231 168 / 0.85),
+      0 0 44px rgb(62 181 127 / 0.6);
+    --duration-fast: 150ms;
+    --duration-standard: 300ms;
+    --duration-slow: 600ms;
+    --duration-cinematic: 1200ms;
+
     @media (width >= 48rem) {
       --nav-h: 5rem;
     }

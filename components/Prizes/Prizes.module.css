@@ -21,7 +21,7 @@
 .eyebrow {
   margin: 0 0 0.9rem;
   color: var(--color-mint);
-  font-family: var(--font-body), sans-serif;
+  font-family: var(--font-sans), sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -44,7 +44,7 @@
 .subtitle {
   margin: 1rem 0 0;
   color: var(--color-muted);
-  font-family: var(--font-body), sans-serif;
+  font-family: var(--font-sans), sans-serif;
   font-size: clamp(0.875rem, 1.5vw, 1rem);
   line-height: 1.6;
 }
@@ -238,7 +238,7 @@
 .label {
   margin: 1.1rem 0 0;
   color: var(--color-muted);
-  font-family: var(--font-body), sans-serif;
+  font-family: var(--font-sans), sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.12em;
