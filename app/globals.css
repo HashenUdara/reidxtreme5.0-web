@@ -11,11 +11,15 @@
   --color-panel: rgb(3 15 13 / 0.72);
   --color-line: rgb(140 245 189 / 0.35);
 
+  /* DESIGN.md §37 content width. */
+  --container-page: 87.5rem;
+
   --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-draw: cubic-bezier(0.16, 1, 0.3, 1);
 
   --animate-scroll-cue: scroll-cue 2.4s var(--ease-draw) infinite;
   --animate-sound-bar: sound-bar 0.9s ease-in-out infinite;
+  --animate-marquee: marquee 28s linear infinite;
 
   @keyframes scroll-cue {
     0% {
@@ -28,6 +32,13 @@
     100% {
       transform: translateY(400%);
       opacity: 0;
+    }
+  }
+
+  /* Moves one of three identical card groups, so the loop is seamless. */
+  @keyframes marquee {
+    to {
+      transform: translateX(-33.333333%);
     }
   }
 
@@ -45,7 +56,6 @@
 @theme inline {
   --font-display: var(--font-barlow-condensed), sans-serif;
   --font-sans: var(--font-inter), sans-serif;
-  --color-background: #03080a;
 }
 
 /* Scales glow opacity; registered so it can be transitioned. */
@@ -62,48 +72,68 @@
     0 0 44px rgb(62 181 127 / calc(0.6 * var(--glow)));
 }
 
+/* DESIGN.md §29 technical grid. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(rgb(140 245 189 / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(140 245 189 / 0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
 /* Figma "Soft Glow": drop shadow of 14px #6EE7A8 at 50%. */
 @utility soft-glow {
   box-shadow: 0 0 14px rgb(110 231 168 / 0.5);
 }
 
+/* Entrance keyframes. Each runs from these values to the element's own, so
+   callers set duration and delay, e.g. animate-[rise-in_450ms_ease_both]. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+/* For SVG strokes with pathLength="1" and stroke-dasharray: 1. */
+@keyframes draw-line {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
 @layer base {
   :root {
     --nav-h: 4rem;
-    --background: #03080a;
-    --footer-panel: rgba(3, 15, 13, 0.72);
-    --footer-border: rgba(140, 245, 189, 0.35);
-    --footer-mint: #8cf5bd;
-    --footer-emerald: #3fb57f;
-    --footer-text: #d6e4dc;
-    --footer-muted: #a9c2b5;
-    --footer-white: #f5faf7;
 
     @media (width >= 48rem) {
       --nav-h: 5rem;
     }
   }
 
-  * {
-    box-sizing: border-box;
-  }
-
   html {
     color-scheme: dark;
     width: 100%;
+    /* In-page links land below the fixed nav. */
+    scroll-padding-top: var(--nav-h);
+
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
+    @apply bg-grid;
     background-color: var(--color-bg);
-    background-image:
-      linear-gradient(rgba(140, 245, 189, 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(140, 245, 189, 0.035) 1px, transparent 1px);
-    background-size: 40px 40px;
     background-attachment: fixed;
     color: var(--color-body);
     width: 100%;
     min-height: 100vh;
-    margin: 0;
     overflow-x: clip;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -146,8 +176,14 @@
       color: var(--color-white);
     }
 
-    &:hover::after {
+    &:hover::after,
+    &[aria-current]::after {
       transform: scaleX(1);
+    }
+
+    /* The section in view (§17). */
+    &[aria-current] {
+      color: var(--color-mint);
     }
   }
 
@@ -181,25 +217,6 @@
       transform: translateY(0);
     }
   }
-
-  .page-shell {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    align-items: center;
-    padding: clamp(1rem, 5vw, 4.5rem);
-    background:
-      radial-gradient(ellipse at 14% 90%, rgba(20, 103, 68, 0.13), transparent 36rem),
-      radial-gradient(ellipse at 90% 10%, rgba(31, 104, 81, 0.11), transparent 32rem),
-      var(--color-bg);
-  }
-
-  @media (max-width: 768px) {
-    .page-shell {
-      align-items: center;
-      padding: 1rem;
-    }
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -210,8 +227,5 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-  html {
-    scroll-behavior: auto;
   }
 }

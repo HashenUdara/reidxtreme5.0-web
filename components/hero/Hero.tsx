@@ -7,7 +7,7 @@ import { HeroMedia } from "./HeroMedia";
 import { ScrollCue } from "./ScrollCue";
 import { SoundToggle } from "./SoundToggle";
 import { STAGE, STILL_CUES, VIDEO_CUES } from "./stages";
-import { readMotionPreference, useMotionPreference } from "./useMotionPreference";
+import { readMotionPreference, useMotionPreference } from "@/hooks/useMotionPreference";
 
 // Give up on the video and show the still if it hasn't started by then.
 const START_TIMEOUT_MS = 3000;
@@ -91,7 +91,7 @@ export function Hero() {
         <HeroMedia ref={videoRef} settled={settled} />
         <HeroCopy stage={stage} settled={settled} reduced={preference === "reduced"} />
 
-        <div className="absolute inset-x-0 bottom-0 mx-auto flex w-[min(92%,1400px)] items-end justify-between pb-6 md:pb-8">
+        <div className="absolute inset-x-0 bottom-0 mx-auto flex w-[min(92%,var(--container-page))] items-end justify-between pb-6 md:pb-8">
           <ScrollCue visible={stage >= STAGE.scrollCue} />
           <SoundToggle
             visible={!settled && stage >= STAGE.eyebrow}
