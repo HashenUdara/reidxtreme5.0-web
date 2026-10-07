@@ -216,6 +216,7 @@ export default function Prizes() {
   return (
     <main className={styles.page}>
       <section
+        id="prizes"
         aria-labelledby="prizes-title"
         className={`${styles.section}${hasMounted ? ` ${styles.js}` : ""}${isVisible ? ` ${styles.visible}` : ""}`}
         ref={sectionRef}

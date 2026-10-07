@@ -91,6 +91,12 @@
   html {
     color-scheme: dark;
     width: 100%;
+    /* In-page links land below the fixed nav. */
+    scroll-padding-top: var(--nav-h);
+
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
+    }
   }
 
   body {

@@ -1,6 +1,5 @@
 /* DESIGN.md §23: the timeline is the bridge itself, one span per phase. */
 .section {
-  scroll-margin-top: var(--nav-h);
   padding: clamp(4.5rem, 10vw, 8rem) clamp(0.25rem, 3vw, 1.5rem);
 }
 

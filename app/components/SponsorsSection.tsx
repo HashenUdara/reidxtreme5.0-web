@@ -81,7 +81,7 @@ export default function SponsorsSection() {
   }
 
   return (
-    <section className={styles.section} aria-labelledby="sponsors-heading">
+    <section id="sponsors" className={styles.section} aria-labelledby="sponsors-heading">
       <div className={styles.header}>
         <div>
           <p className={styles.eyebrow}>06 / ARCHITECTS &amp; PARTNERS</p>
