@@ -53,6 +53,11 @@ export default function Footer() {
             </span>{" "}
             EST. 2026
           </span>
+          <div className="mt-4 flex items-center gap-6">
+            <Image className="h-8 w-auto opacity-85" src={ieeeLogo} alt="IEEE Student Branch of UCSC" sizes="160px" />
+            <span aria-hidden="true" className="h-8 w-px bg-mint/20" />
+            <Image className="h-10 w-auto opacity-85" src={acmLogo} alt="ACM Student Chapter of UCSC" sizes="80px" />
+          </div>
         </section>
 
         <nav
