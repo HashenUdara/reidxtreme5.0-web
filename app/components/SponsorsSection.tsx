@@ -8,69 +8,56 @@ import { cx } from "@/lib/cx";
 type Sponsor = {
   name: string;
   tier: string;
-  logo: string;
-  width: number;
-  height: number;
+  /** Omit until the sponsor is confirmed; the card shows the name instead. */
+  logo?: { src: string; width: number; height: number };
 };
 
+// Sponsors are not confirmed yet. Replace each entry with
+// { name, tier, logo: { src, width, height } } once decided.
 const SPONSORS: Sponsor[] = [
-  {
-    name: "Hiveion",
-    tier: "ASSOCIATE SPONSOR",
-    logo: "https://codequest.ucscieee.lk/_next/static/media/Hiveion_logo.c2ac6ffc.png",
-    width: 200,
-    height: 64,
-  },
-  {
-    name: "Zone24x7",
-    tier: "SILVER SPONSOR",
-    logo: "https://codequest.ucscieee.lk/_next/static/media/zone24x7_logo.5d490333.png",
-    width: 200,
-    height: 71,
-  },
-  {
-    name: "Spera",
-    tier: "GOLD SPONSOR",
-    logo: "https://codequest.ucscieee.lk/_next/static/media/spera_logo.8c191680.png",
-    width: 200,
-    height: 65,
-  },
+  { name: "TBD", tier: "ASSOCIATE SPONSOR" },
+  { name: "TBD", tier: "SILVER SPONSOR" },
+  { name: "TBD", tier: "GOLD SPONSOR" },
 ];
+
+const announced = SPONSORS.filter((sponsor) => sponsor.name !== "TBD");
 
 export default function SponsorsSection() {
   const [isPaused, setIsPaused] = useState(false);
 
   function renderCards(copy: "primary" | "duplicate" | "duplicateTwo") {
-    return SPONSORS.map((sponsor) => (
+    return SPONSORS.map((sponsor, index) => (
       <article
         className="group grid min-h-58 w-[clamp(14rem,20vw,18rem)] min-w-0 grid-rows-[1fr_auto_auto] gap-[0.7rem] overflow-hidden rounded-lg border border-line bg-panel p-5 backdrop-blur-md transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-mint hover:soft-glow motion-reduce:min-h-48 motion-reduce:w-auto motion-reduce:transition-none"
-        key={`${copy}-${sponsor.name}`}
+        key={`${copy}-${index}`}
       >
         <span className="relative grid min-h-23 min-w-0 place-items-center overflow-hidden">
           <span
             className="max-w-full text-center font-display text-[clamp(1.8rem,3vw,2.45rem)] font-bold tracking-[0.04em] [overflow-wrap:anywhere] text-white [grid-area:1/1]"
             data-logo-fallback
-            aria-hidden="true"
-            hidden
+            aria-hidden={sponsor.logo ? "true" : undefined}
+            hidden={Boolean(sponsor.logo)}
           >
             {sponsor.name}
           </span>
-          <Image
-            alt={`${sponsor.name} logo`}
-            className="h-auto max-h-16 w-auto max-w-full object-contain brightness-85 grayscale-35 transition-[filter] duration-200 [grid-area:1/1] group-hover:brightness-100 group-hover:grayscale-0 motion-reduce:transition-none"
-            onError={(event) => {
-              event.currentTarget.hidden = true;
-              const fallback =
-                event.currentTarget.parentElement?.querySelector<HTMLElement>(
-                  "[data-logo-fallback]",
-                );
-              if (fallback) fallback.hidden = false;
-            }}
-            unoptimized
-            src={sponsor.logo}
-            width={sponsor.width}
-            height={sponsor.height}
-          />
+          {sponsor.logo && (
+            <Image
+              alt={`${sponsor.name} logo`}
+              className="h-auto max-h-16 w-auto max-w-full object-contain brightness-85 grayscale-35 transition-[filter] duration-200 [grid-area:1/1] group-hover:brightness-100 group-hover:grayscale-0 motion-reduce:transition-none"
+              onError={(event) => {
+                event.currentTarget.hidden = true;
+                const fallback =
+                  event.currentTarget.parentElement?.querySelector<HTMLElement>(
+                    "[data-logo-fallback]",
+                  );
+                if (fallback) fallback.hidden = false;
+              }}
+              unoptimized
+              src={sponsor.logo.src}
+              width={sponsor.logo.width}
+              height={sponsor.logo.height}
+            />
+          )}
         </span>
         <span className="text-center font-display text-[0.9rem] font-bold tracking-[0.12em] [overflow-wrap:anywhere] text-mint">
           {sponsor.tier}
@@ -98,11 +85,20 @@ export default function SponsorsSection() {
         eyebrow="Architects & partners"
         title="Event sponsors"
         subtitle={
-          <>
-            Proudly partnering with Hiveion,{" "}
-            {/* Inter's contextual alternates would render 24x7 as 24×7. */}
-            <span className="[font-feature-settings:'calt'_0]">Zone24x7</span> &amp; Spera.
-          </>
+          announced.length === 0 ? (
+            "Sponsors to be announced."
+          ) : (
+            <>
+              Proudly partnering with{" "}
+              {/* Inter's contextual alternates would render names like 24x7 as 24×7. */}
+              <span className="[font-feature-settings:'calt'_0]">
+                {new Intl.ListFormat("en", { type: "conjunction" }).format(
+                  announced.map((sponsor) => sponsor.name),
+                )}
+              </span>
+              .
+            </>
+          )
         }
         className="relative z-1 mb-[clamp(2rem,5vw,4rem)]"
       />
