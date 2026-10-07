@@ -1,19 +1,19 @@
 "use client";
 
 import { useInView } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import type { CSSProperties } from "react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { useHydrated } from "@/hooks/useHydrated";
 import { useMotionPreference } from "@/hooks/useMotionPreference";
 import { cx } from "@/lib/cx";
 
-type Prize = { place: 1 | 2 | 3; label: string; amount: number };
+type Prize = { place: 1 | 2 | 3; label: string };
 
 const PRIZES: Prize[] = [
-  { place: 2, label: "2ND PLACE", amount: 40000 },
-  { place: 1, label: "1ST PLACE", amount: 60000 },
-  { place: 3, label: "3RD PLACE", amount: 20000 },
+  { place: 2, label: "2ND PLACE" },
+  { place: 1, label: "1ST PLACE" },
+  { place: 3, label: "3RD PLACE" },
 ];
 
 const STAGGER_INDEX: Record<Prize["place"], number> = {
@@ -21,43 +21,6 @@ const STAGGER_INDEX: Record<Prize["place"], number> = {
   2: 1,
   3: 2,
 };
-
-// Design system sections 10, 19, and 34: count once, or show the final value for reduced motion.
-function useCountUp(
-  target: number,
-  isVisible: boolean,
-  hasMounted: boolean,
-  reducedMotion: boolean,
-  staggerIndex: number,
-) {
-  const [count, setCount] = useState(target);
-
-  useEffect(() => {
-    if (!hasMounted || !isVisible || reducedMotion) return;
-
-    let frame = 0;
-    const timeout = window.setTimeout(() => {
-      const startTime = performance.now();
-      setCount(0);
-
-      const tick = (now: number) => {
-        const progress = Math.min((now - startTime) / 1100, 1);
-        const easedProgress = 1 - (1 - progress) ** 3;
-        setCount(Math.round(target * easedProgress));
-        if (progress < 1) frame = window.requestAnimationFrame(tick);
-      };
-
-      frame = window.requestAnimationFrame(tick);
-    }, 1300 + staggerIndex * 180);
-
-    return () => {
-      window.clearTimeout(timeout);
-      window.cancelAnimationFrame(frame);
-    };
-  }, [hasMounted, isVisible, reducedMotion, staggerIndex, target]);
-
-  return !hasMounted || !isVisible || reducedMotion ? target : count;
-}
 
 // Entrance timings, offset per card by --i (DESIGN.md §10 and §19).
 const BUILD = {
@@ -67,7 +30,6 @@ const BUILD = {
   number: "animate-[fade-in_300ms_var(--ease-standard)_calc(1.1s_+_var(--i))_both]",
   label: "animate-[rise-in_450ms_var(--ease-standard)_calc(1.1s_+_var(--i))_both]",
   amount: "animate-[fade-in_450ms_var(--ease-standard)_calc(1.3s_+_var(--i))_both]",
-  currency: "animate-[rise-in_450ms_var(--ease-standard)_calc(1.7s_+_var(--i))_both]",
 };
 
 const CORNERS = [
@@ -118,7 +80,6 @@ type PrizeCardProps = {
 function PrizeCard({ prize, isVisible, hasMounted, reducedMotion }: PrizeCardProps) {
   const cardRef = useRef<HTMLElement | null>(null);
   const staggerIndex = STAGGER_INDEX[prize.place];
-  const count = useCountUp(prize.amount, isVisible, hasMounted, reducedMotion, staggerIndex);
   const first = prize.place === 1;
   // Hidden until it scrolls in, but only once JS is running to reveal it.
   const waiting = hasMounted && !isVisible && !reducedMotion;
@@ -134,7 +95,7 @@ function PrizeCard({ prize, isVisible, hasMounted, reducedMotion }: PrizeCardPro
 
   return (
     <article
-      aria-label={`${prize.label}: ${prize.amount.toLocaleString("en-US")} LKR`}
+      aria-label={`${prize.label}: TBD`}
       className={cx(
         "relative flex min-w-0 flex-col items-center justify-center overflow-hidden rounded-lg border border-transparent px-[0.85rem] py-[clamp(1.1rem,2vw,1.75rem)] text-center backdrop-blur-md",
         "transition-[box-shadow,transform] duration-300 ease-standard motion-reduce:transition-none",
@@ -180,15 +141,7 @@ function PrizeCard({ prize, isVisible, hasMounted, reducedMotion }: PrizeCardPro
           build && BUILD.amount,
         )}
       >
-        {count.toLocaleString("en-US")}
-      </p>
-      <p
-        className={cx(
-          "relative z-1 mt-2 font-display text-base leading-tight font-semibold tracking-[0.2em] text-white",
-          build && BUILD.currency,
-        )}
-      >
-        LKR
+        TBD
       </p>
     </article>
   );
