@@ -122,7 +122,7 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
   return (
     <section id="registration" className={styles.section} aria-labelledby={`${id}-heading`}>
       <h2 className={styles.sectionTitle} id={`${id}-heading`}>
-        REGISTRATION FORM:
+        Register Now!
       </h2>
 
       <div className={styles.panel}>
