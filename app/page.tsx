@@ -14,11 +14,11 @@ export default function Home() {
       <main className="w-full">
         <Hero />
         <Timeline />
+        <Prizes />
+        <SponsorsSection />
         <section className={styles.page}>
           <RegistrationForm />
         </section>
-        <Prizes />
-        <SponsorsSection />
       </main>
       <div className="page-shell">
         <Footer />
