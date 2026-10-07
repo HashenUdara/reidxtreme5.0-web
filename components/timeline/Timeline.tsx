@@ -178,6 +178,8 @@ function lookStyle({ status, lit, dim }: Look): CSSProperties {
 const BRIDGE_PIECE =
   "absolute max-w-none select-none mix-blend-plus-lighter transition-[opacity,filter,clip-path,translate] ease-[var(--ease-standard),var(--ease-standard),var(--ease-draw),var(--ease-draw)]";
 const CAP = "absolute max-w-none mix-blend-plus-lighter transition-opacity duration-500 ease-standard";
+const DATE =
+  "mt-[0.35em] font-display text-[clamp(0.85rem,1.8cqi,1.2rem)] leading-[1.2] font-medium tracking-[0.08em] text-mint";
 
 export function Timeline() {
   const ready = useHydrated();
@@ -219,7 +221,7 @@ export function Timeline() {
     <section
       id="timeline"
       aria-labelledby="timeline-title"
-      className="px-[clamp(0.25rem,3vw,1.5rem)] py-[clamp(4.5rem,10vw,8rem)]"
+      className="px-[clamp(0.75rem,3vw,1.5rem)] py-[clamp(4.5rem,10vw,8rem)]"
     >
       <SectionHeader
         id="timeline-title"
@@ -381,15 +383,18 @@ export function Timeline() {
                 >
                   {phase.title}
                 </h3>
-                <time
-                  className="mt-[0.35em] font-display text-[clamp(0.85rem,1.8cqi,1.2rem)] leading-[1.2] font-medium tracking-[0.08em] text-mint"
-                  dateTime={phase.start}
-                >
-                  {formatDates(phase)}
-                </time>
-                <p className="mt-[0.5em] mb-0 max-w-[30ch] font-sans text-[clamp(0.75rem,1.5cqi,0.95rem)] leading-normal text-pretty text-muted">
-                  {phase.summary}
-                </p>
+                {phase.start ? (
+                  <time className={DATE} dateTime={phase.start}>
+                    {formatDates(phase)}
+                  </time>
+                ) : (
+                  <p className={cx(DATE, "mb-0")}>{formatDates(phase)}</p>
+                )}
+                {phase.summary && (
+                  <p className="mt-[0.5em] mb-0 max-w-[30ch] font-sans text-[clamp(0.75rem,1.5cqi,0.95rem)] leading-normal text-pretty text-muted">
+                    {phase.summary}
+                  </p>
+                )}
               </li>
             );
           })}
