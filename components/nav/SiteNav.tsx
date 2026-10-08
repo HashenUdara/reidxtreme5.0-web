@@ -16,7 +16,7 @@ const LINKS = [
   { id: "prizes", label: "Prizes" },
   { id: "sponsors", label: "Sponsors" },
 ];
-const REGISTER = { href: "#registration", label: "Connect & Register" };
+const REGISTER = { href: "/register", label: "Connect & Register" };
 const SECTION_IDS = LINKS.map((link) => link.id);
 
 /** The linked section crossing the middle of the viewport, if any (§17). */
@@ -71,11 +71,10 @@ export function SiteNav() {
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed inset-x-0 top-0 z-10 border-b transition-[background-color,border-color,backdrop-filter] duration-300 ${
-        solid
-          ? "border-mint/15 bg-panel backdrop-blur-md"
-          : "border-transparent bg-transparent"
-      }`}
+      className={`fixed inset-x-0 top-0 z-10 border-b transition-[background-color,border-color,backdrop-filter] duration-300 ${solid
+        ? "border-mint/15 bg-panel backdrop-blur-md"
+        : "border-transparent bg-transparent"
+        }`}
     >
       <div className="mx-auto flex h-(--nav-h) w-[min(92%,var(--container-page))] items-center justify-between">
         <Link href="/" className="-m-1 rounded-sm p-1">
@@ -114,15 +113,13 @@ export function SiteNav() {
         >
           <span
             aria-hidden
-            className={`absolute h-px w-[18px] bg-white transition-transform duration-300 ease-standard ${
-              open ? "rotate-45" : "-translate-y-[3px]"
-            }`}
+            className={`absolute h-px w-[18px] bg-white transition-transform duration-300 ease-standard ${open ? "rotate-45" : "-translate-y-[3px]"
+              }`}
           />
           <span
             aria-hidden
-            className={`absolute h-px w-[18px] bg-white transition-transform duration-300 ease-standard ${
-              open ? "-rotate-45" : "translate-y-[3px]"
-            }`}
+            className={`absolute h-px w-[18px] bg-white transition-transform duration-300 ease-standard ${open ? "-rotate-45" : "translate-y-[3px]"
+              }`}
           />
         </button>
       </div>
