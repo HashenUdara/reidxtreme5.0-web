@@ -31,7 +31,7 @@ const SOCIALS = [
     ],
   },
 ];
-const EXTERNAL =<span aria-hidden="true" className="text-[0.72rem] text-emerald">↗</span>;
+const EXTERNAL = <span aria-hidden="true" className="text-[0.72rem] text-emerald">↗</span>;
 
 export default function Footer() {
   return (
@@ -78,29 +78,9 @@ export default function Footer() {
         </section>
 
         <nav
-          className="grid grid-cols-1 gap-8 pt-[0.4rem] sm:grid-cols-3 md:gap-[clamp(1.25rem,3vw,3rem)]"
+          className="flex flex-wrap justify-center gap-8 pt-[0.4rem] sm:justify-end md:gap-[clamp(2.5rem,5vw,5rem)]"
           aria-label="Footer navigation"
         >
-          <section className={LINK_GROUP} aria-labelledby="contact-heading">
-            <h2 className={LINK_HEADING} id="contact-heading">
-              CONTACT
-            </h2>
-            <ul className={LINK_LIST}>
-              <li>
-                <a className={LINK} href="mailto:info@reidxtreme.lk">
-                  info@reidxtreme.lk
-                </a>
-              </li>
-              <li>
-                <a
-                  className={LINK}
-                  href="mailto:info@reidxtreme.lk?subject=REID%20XTREME%20Help%20Desk"
-                >
-                  Help Desk
-                </a>
-              </li>
-            </ul>
-          </section>
 
           {SOCIALS.map((group) => (
             <section className={LINK_GROUP} aria-labelledby={`${group.id}-heading`} key={group.id}>
