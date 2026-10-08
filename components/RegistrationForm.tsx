@@ -200,8 +200,24 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
         className="mb-[clamp(1.5rem,4vw,2.5rem)]"
       />
 
-      <div className="mx-auto w-full max-w-[520px] min-w-0 rounded-lg border border-line bg-panel p-[clamp(1rem,5vw,1.6rem)] shadow-[0_20px_55px_rgb(0_0_0/0.3),inset_0_1px_rgb(245_250_247/0.035)] backdrop-blur-md max-[420px]:p-[0.9rem]">
-        <form className="grid min-w-0 gap-[1.15rem]" onSubmit={handleSubmit}>
+      <div className="relative mx-auto w-full max-w-[520px] min-w-0 rounded-lg border border-line bg-panel shadow-[0_20px_55px_rgb(0_0_0/0.3),inset_0_1px_rgb(245_250_247/0.035)] backdrop-blur-md">
+        
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-lg bg-bg/40 backdrop-blur-[3px]">
+          <div className="mx-4 flex flex-col items-center justify-center rounded-xl border border-mint/30 bg-panel/90 p-8 shadow-[0_0_40px_rgb(140_245_189/0.15)] backdrop-blur-md text-center">
+            <h3 className="font-display text-xl font-bold tracking-[0.1em] text-white md:text-2xl">
+              REGISTRATIONS
+            </h3>
+            <p className="mt-1 font-display text-2xl font-bold tracking-[0.05em] text-mint text-glow md:text-3xl">
+              COMING SOON
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-muted">
+              Assemble your team. The chasm opens shortly.
+            </p>
+          </div>
+        </div>
+
+        <div className="p-[clamp(1rem,5vw,1.6rem)] max-[420px]:p-[0.9rem] opacity-25 pointer-events-none select-none grayscale-[0.5]">
+          <form className="grid min-w-0 gap-[1.15rem]" onSubmit={handleSubmit}>
           <div className={FIELD}>
             <label className={LABEL} htmlFor={`${id}-team-name`}>
               TEAM NAME <span className={HINT}>(INPUT)</span>
@@ -305,6 +321,7 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
             {status}
           </p>
         </form>
+        </div>
       </div>
     </motion.section>
   );
