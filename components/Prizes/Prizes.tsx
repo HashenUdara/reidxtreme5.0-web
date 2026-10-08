@@ -8,12 +8,12 @@ import { useHydrated } from "@/hooks/useHydrated";
 import { useMotionPreference } from "@/hooks/useMotionPreference";
 import { cx } from "@/lib/cx";
 
-type Prize = { place: 1 | 2 | 3; label: string; amount: number };
+type Prize = { place: 1 | 2 | 3; label: string; amount: number | string };
 
 const PRIZES: Prize[] = [
-  { place: 2, label: "2ND PLACE", amount: 40000 },
-  { place: 1, label: "1ST PLACE", amount: 60000 },
-  { place: 3, label: "3RD PLACE", amount: 20000 },
+  { place: 2, label: "2ND PLACE", amount: "TBD" },
+  { place: 1, label: "1ST PLACE", amount: "TBD" },
+  { place: 3, label: "3RD PLACE", amount: "TBD" },
 ];
 
 const STAGGER_INDEX: Record<Prize["place"], number> = {
@@ -118,7 +118,13 @@ type PrizeCardProps = {
 function PrizeCard({ prize, isVisible, hasMounted, reducedMotion }: PrizeCardProps) {
   const cardRef = useRef<HTMLElement | null>(null);
   const staggerIndex = STAGGER_INDEX[prize.place];
-  const count = useCountUp(prize.amount, isVisible, hasMounted, reducedMotion, staggerIndex);
+  const count = useCountUp(
+    typeof prize.amount === "number" ? prize.amount : 0,
+    isVisible,
+    hasMounted,
+    reducedMotion,
+    staggerIndex
+  );
   const first = prize.place === 1;
   // Hidden until it scrolls in, but only once JS is running to reveal it.
   const waiting = hasMounted && !isVisible && !reducedMotion;
@@ -180,16 +186,18 @@ function PrizeCard({ prize, isVisible, hasMounted, reducedMotion }: PrizeCardPro
           build && BUILD.amount,
         )}
       >
-        {count.toLocaleString("en-US")}
+        {typeof prize.amount === "number" ? count.toLocaleString("en-US") : prize.amount}
       </p>
-      <p
-        className={cx(
-          "relative z-1 mt-2 font-display text-base leading-tight font-semibold tracking-[0.2em] text-white",
-          build && BUILD.currency,
-        )}
-      >
-        LKR
-      </p>
+      {typeof prize.amount === "number" && (
+        <p
+          className={cx(
+            "relative z-1 mt-2 font-display text-base leading-tight font-semibold tracking-[0.2em] text-white",
+            build && BUILD.currency,
+          )}
+        >
+          LKR
+        </p>
+      )}
     </article>
   );
 }
