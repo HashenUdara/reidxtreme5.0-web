@@ -3,12 +3,24 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
+// Module-level variable to track if this is the first time the app is loading.
+// This persists across Next.js soft navigations.
+let isInitialLoad = true;
+
 export default function Template({ children }: { children: React.ReactNode }) {
-  const [isTransitioning, setIsTransitioning] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(() => {
+    if (isInitialLoad) return false;
+    return true;
+  });
 
   useEffect(() => {
     // Force scroll to top instantly on route change
     window.scrollTo(0, 0);
+
+    if (isInitialLoad) {
+      isInitialLoad = false;
+      return;
+    }
 
     // Strict minimum 2-second (2000ms) delay
     const timer = setTimeout(() => {
