@@ -4,6 +4,7 @@ import { useId, useState, type FormEvent } from "react";
 import CustomSelect from "@/components/CustomSelect";
 import { SectionHeader } from "@/components/SectionHeader";
 import { cx } from "@/lib/cx";
+import { motion } from "motion/react";
 
 const YEARS = [
   { label: "Year 1", value: "1" },
@@ -22,7 +23,7 @@ type Member = {
 export type RegistrationSubmission = {
   teamName: string;
   teamLead: Member;
-  // members: Member[];
+  members: Member[];
 };
 
 type RegistrationFormProps = {
@@ -184,7 +185,15 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
   }
 
   return (
-    <section id="registration" aria-labelledby={`${id}-heading`} className="w-full min-w-0">
+    <motion.section
+      id="registration"
+      aria-labelledby={`${id}-heading`}
+      className="w-full min-w-0"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+    >
       <SectionHeader
         id={`${id}-heading`}
         title="Register Now!"
@@ -297,6 +306,6 @@ export default function RegistrationForm({ onSubmit }: RegistrationFormProps) {
           </p>
         </form>
       </div>
-    </section>
+    </motion.section>
   );
 }
