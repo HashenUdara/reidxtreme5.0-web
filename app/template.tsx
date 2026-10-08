@@ -2,12 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { usePathname } from "next/navigation";
 
 // Module-level variable to track if this is the first time the app is loading.
 // This persists across Next.js soft navigations.
 let isInitialLoad = true;
 
 export default function Template({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  
   const [isTransitioning, setIsTransitioning] = useState(() => {
     if (isInitialLoad) return false;
     return true;
@@ -22,13 +25,16 @@ export default function Template({ children }: { children: React.ReactNode }) {
       return;
     }
 
+    // If template didn't remount but pathname changed, force transition true
+    setIsTransitioning(true);
+
     // Strict minimum 2-second (2000ms) delay
     const timer = setTimeout(() => {
       setIsTransitioning(false);
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [pathname]);
 
   return (
     <>
