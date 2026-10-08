@@ -27,10 +27,6 @@ export function SectionHeader({ id, title, eyebrow, subtitle, className = "" }: 
       {subtitle && (
         <p className="mt-4 text-[clamp(0.875rem,1.5vw,1rem)] leading-relaxed text-muted">{subtitle}</p>
       )}
-      <div
-        aria-hidden="true"
-        className="mx-auto mt-[clamp(1.5rem,4vw,2.5rem)] h-px w-full max-w-152 bg-linear-to-r from-transparent via-mint/35 to-transparent"
-      />
     </header>
   );
 }

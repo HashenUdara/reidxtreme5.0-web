@@ -19,7 +19,7 @@ export default function Home() {
         <Timeline />
         <Prizes />
         <SponsorsSection />
-        <section className="relative isolate overflow-hidden py-[clamp(5rem,12vw,10rem)] text-center bg-[radial-gradient(ellipse_at_50%_0%,rgb(36_117_82/0.16),transparent_42rem)]">
+        <section className="relative isolate overflow-hidden py-[clamp(5rem,12vw,10rem)] text-center">
           <div className="relative z-1 mx-auto max-w-2xl px-6">
             <h2 className="mb-6 font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.98] font-bold uppercase tracking-[0.025em] text-white">
               Ready to Cross the Chasm?

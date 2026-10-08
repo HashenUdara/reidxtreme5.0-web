@@ -8,7 +8,7 @@ export function AboutSection() {
     <motion.section
       id="about"
       aria-labelledby="about-heading"
-      className="relative isolate overflow-hidden pt-12 pb-[clamp(5rem,10vw,8rem)]"
+      className="relative isolate overflow-hidden pt-[clamp(5rem,10vw,8rem)] pb-[clamp(3rem,6vw,5rem)]"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}

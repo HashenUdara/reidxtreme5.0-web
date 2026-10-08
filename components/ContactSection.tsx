@@ -24,11 +24,7 @@ export function ContactSection() {
     <section
       id="contact"
       aria-labelledby="contact-heading"
-      className={cx(
-        "relative isolate overflow-hidden py-[clamp(5rem,10vw,8rem)] bg-bg",
-        "bg-[radial-gradient(circle_at_50%_0%,rgb(140_245_189/0.04)_0%,transparent_60%)]",
-        "before:pointer-events-none before:absolute before:inset-0 before:z-0 before:bg-grid before:[mask-image:radial-gradient(circle_at_center,black_30%,transparent_80%)]"
-      )}
+      className="relative isolate overflow-hidden py-[clamp(5rem,10vw,8rem)]"
     >
       <SectionHeader
         id="contact-heading"

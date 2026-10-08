@@ -13,7 +13,7 @@ export default function RegisterPage() {
       <SiteNav />
       <main className="w-full">
         {/* The body already draws the grid; this adds only the glow from above. */}
-        <div className="grid min-h-screen pt-[clamp(6rem,15vh,10rem)] pb-16 [place-items:safe_center] bg-[radial-gradient(ellipse_at_50%_0%,rgb(36_117_82/0.16),transparent_42rem)] p-3 sm:p-[clamp(1rem,5vw,3rem)]">
+        <div className="grid min-h-screen pt-[clamp(6rem,15vh,10rem)] pb-16 [place-items:safe_center] p-3 sm:p-[clamp(1rem,5vw,3rem)]">
           <RegistrationForm />
         </div>
       </main>
