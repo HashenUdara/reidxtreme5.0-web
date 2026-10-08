@@ -2,7 +2,7 @@ import { Hero } from "@/components/hero/Hero";
 import { SiteNav } from "@/components/nav/SiteNav";
 import { Timeline } from "@/components/timeline/Timeline";
 import Footer from "@/components/Footer";
-import RegistrationForm from "@/components/RegistrationForm";
+import Link from "next/link";
 import Prizes from "@/components/Prizes/Prizes";
 import SponsorsSection from "@/app/components/SponsorsSection";
 
@@ -15,10 +15,22 @@ export default function Home() {
         <Timeline />
         <Prizes />
         <SponsorsSection />
-        {/* The body already draws the grid; this adds only the glow from above. */}
-        <div className="grid min-h-screen [place-items:safe_center] bg-[radial-gradient(ellipse_at_50%_0%,rgb(36_117_82/0.16),transparent_42rem)] p-3 sm:p-[clamp(1rem,5vw,3rem)]">
-          <RegistrationForm />
-        </div>
+        <section className="relative isolate overflow-hidden py-[clamp(5rem,12vw,10rem)] text-center bg-[radial-gradient(ellipse_at_50%_0%,rgb(36_117_82/0.16),transparent_42rem)]">
+          <div className="relative z-1 mx-auto max-w-2xl px-6">
+            <h2 className="mb-6 font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.98] font-bold uppercase tracking-[0.025em] text-white">
+              Ready to Cross the Chasm?
+            </h2>
+            <p className="mb-10 text-[clamp(1rem,2vw,1.15rem)] leading-relaxed text-muted">
+              Assemble your team, build what's next, and claim your share of the prize pool.
+            </p>
+            <Link
+              href="/register"
+              className="btn-primary inline-flex h-auto min-h-13 items-center justify-center px-10 text-[clamp(0.68rem,3vw,0.8rem)] font-bold tracking-[0.06em] shadow-[0_0_15px_rgb(140_245_189/0.25)] transition-[box-shadow,transform] duration-300 hover:-translate-y-[2px] hover:shadow-[0_0_25px_rgb(140_245_189/0.4)]"
+            >
+              REGISTER NOW
+            </Link>
+          </div>
+        </section>
       </main>
       {/* No bottom padding: the page ends at the footer's edge. */}
       <div className="px-4 pt-4 md:px-[clamp(1rem,5vw,4.5rem)] md:pt-[clamp(1rem,5vw,4.5rem)]">
