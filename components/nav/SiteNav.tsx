@@ -89,18 +89,18 @@ export function SiteNav() {
 
         <nav aria-label="Primary" className="hidden items-center gap-10 md:flex">
           {LINKS.map((link) => (
-            <a
+            <Link
               key={link.id}
-              href={`#${link.id}`}
+              href={`/#${link.id}`}
               aria-current={active === link.id ? "true" : undefined}
               className="nav-link"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
-          <a href={REGISTER.href} className="btn-primary">
+          <Link href={REGISTER.href} className="btn-primary">
             {REGISTER.label}
-          </a>
+          </Link>
         </nav>
 
         <button
@@ -137,23 +137,23 @@ export function SiteNav() {
           >
             <div className="mx-auto flex w-[min(92%,var(--container-page))] flex-col gap-1 py-4">
               {LINKS.map((link) => (
-                <a
+                <Link
                   key={link.id}
-                  href={`#${link.id}`}
+                  href={`/#${link.id}`}
                   aria-current={active === link.id ? "true" : undefined}
                   onClick={() => setOpen(false)}
                   className="nav-link py-3"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
-              <a
+              <Link
                 href={REGISTER.href}
                 onClick={() => setOpen(false)}
                 className="btn-primary mt-3"
               >
                 {REGISTER.label}
-              </a>
+              </Link>
             </div>
           </motion.nav>
         )}
