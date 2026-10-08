@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import Prizes from "@/components/Prizes/Prizes";
 import SponsorsSection from "@/app/components/SponsorsSection";
+import { ContactSection } from "@/components/ContactSection";
 import { FAQSection } from "@/components/FAQSection";
 
 export default function Home() {
@@ -34,6 +35,7 @@ export default function Home() {
             </Link>
           </div>
         </section>
+        <ContactSection />
         <FAQSection />
       </main>
       <div className="p-4 md:p-[clamp(1rem,5vw,4.5rem)]">
