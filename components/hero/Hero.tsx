@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MotionConfig } from "motion/react";
+import { motion, MotionConfig } from "motion/react";
+import Link from "next/link";
 import { HeroCopy } from "./HeroCopy";
 import { HeroMedia } from "./HeroMedia";
 import { ScrollCue } from "./ScrollCue";
@@ -99,6 +100,23 @@ export function Hero() {
             onToggle={toggleSound}
           />
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{
+            opacity: stage >= STAGE.subline || settled ? 1 : 0,
+            y: stage >= STAGE.subline || settled ? 0 : 10,
+          }}
+          transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 md:bottom-16"
+        >
+          <Link
+            href="/register"
+            className="btn-primary inline-flex h-auto min-h-12 items-center justify-center px-8 text-[clamp(0.68rem,3vw,0.8rem)] font-bold tracking-[0.06em] shadow-[0_0_15px_rgb(140_245_189/0.25)] transition-[box-shadow,transform] duration-300 hover:-translate-y-[2px] hover:shadow-[0_0_25px_rgb(140_245_189/0.4)]"
+          >
+            REGISTER NOW
+          </Link>
+        </motion.div>
       </section>
     </MotionConfig>
   );

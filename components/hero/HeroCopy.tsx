@@ -3,6 +3,7 @@
 import { motion, type Variants } from "motion/react";
 import type { CSSProperties, ReactNode } from "react";
 import { STAGE } from "./stages";
+import Link from "next/link";
 
 const EASE_DRAW = [0.16, 1, 0.3, 1] as const;
 
@@ -76,8 +77,6 @@ export function HeroCopy({ stage, settled, reduced }: HeroCopyProps) {
           <HeadlineLine words={LINE_TWO} state={at(STAGE.lineTwo)} reduced={reduced} />
         </span>
       </h1>
-
-
     </div>
   );
 }
