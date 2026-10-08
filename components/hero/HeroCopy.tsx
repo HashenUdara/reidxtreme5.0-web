@@ -65,7 +65,7 @@ export function HeroCopy({ stage, settled, reduced }: HeroCopyProps) {
       style={GEOMETRY}
       className="absolute inset-x-0 top-(--nav-h) flex h-(--copy-space) flex-col items-center justify-center px-[4%] text-center"
     >
-      <h1 className="flex flex-col items-center">
+      <h1 className="flex flex-col items-center pt-10 md:pt-16">
         <Eyebrow state={at(STAGE.eyebrow)}>REID XTREME 5.0</Eyebrow>
 
         <span
@@ -77,14 +77,7 @@ export function HeroCopy({ stage, settled, reduced }: HeroCopyProps) {
         </span>
       </h1>
 
-      <motion.p
-        initial="hidden"
-        animate={at(STAGE.subline)}
-        variants={word(reduced)}
-        className="mt-4 max-w-[34ch] text-[15px] leading-relaxed font-medium text-body/85 [text-shadow:0_1px_14px_rgb(3_8_10/0.65)] md:mt-5 md:text-[17px]"
-      >
-        A hackathon inspired by building paths.
-      </motion.p>
+
     </div>
   );
 }
