@@ -1,31 +1,34 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
 
-// Module-level variable to track if this is the first time the app is loading.
-// This persists across Next.js soft navigations.
-let isInitialLoad = true;
+let hasAppLoaded = false;
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   
+  // Track whether THIS instance of the template was created during the initial load
+  const isInitialInstance = useRef(!hasAppLoaded);
+  const initialPathname = useRef(pathname);
+  
   const [isTransitioning, setIsTransitioning] = useState(() => {
-    if (isInitialLoad) return false;
-    return true;
+    return hasAppLoaded; // true on route changes, false on first load
   });
 
   useEffect(() => {
     // Force scroll to top instantly on route change
     window.scrollTo(0, 0);
 
-    if (isInitialLoad) {
-      isInitialLoad = false;
+    // If it's the initial instance AND the pathname hasn't changed since it mounted,
+    // skip the transition. This check perfectly survives React 18 Strict Mode double-mounts.
+    if (isInitialInstance.current && pathname === initialPathname.current) {
+      hasAppLoaded = true;
       return;
     }
 
-    // If template didn't remount but pathname changed, force transition true
+    // Otherwise, it's a route change. Trigger the transition!
     setIsTransitioning(true);
 
     // Strict minimum 2-second (2000ms) delay

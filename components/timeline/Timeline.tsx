@@ -186,7 +186,7 @@ export function Timeline() {
   const reduced = useMotionPreference() === "reduced";
   // Watch the hit areas, not the spans: Chrome counts a target's own
   // clip-path, and a span waiting to build is clipped to nothing.
-  const hits = useRef<SVGSVGElement>(null);
+  const hits = useRef<HTMLOListElement>(null);
   const inView = useRevealCount(hits);
   // Kept apart so that scrolling a span out from under a resting mouse doesn't
   // clear the path of the phase that has keyboard focus.
@@ -312,7 +312,6 @@ export function Timeline() {
         </div>
 
         <svg
-          ref={hits}
           className="pointer-events-none absolute inset-0 size-full overflow-visible"
           viewBox={`${FRAME.x} ${FRAME.y} ${FRAME.w} ${FRAME.h}`}
           aria-hidden="true"
@@ -331,7 +330,7 @@ export function Timeline() {
           ))}
         </svg>
 
-        <ol className="pointer-events-none absolute inset-0 m-0 list-none p-0">
+        <ol ref={hits} className="pointer-events-none absolute inset-0 m-0 list-none p-0">
           {PHASES.map((phase, k) => {
             const status = statusOf(k);
             const left = k % 2 === 1;
