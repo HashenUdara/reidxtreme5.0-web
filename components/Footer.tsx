@@ -31,7 +31,7 @@ const SOCIALS = [
     ],
   },
 ];
-const EXTERNAL =<span aria-hidden="true" className="text-[0.72rem] text-emerald">↗</span>;
+const EXTERNAL = <span aria-hidden="true" className="text-[0.72rem] text-emerald">↗</span>;
 
 export default function Footer() {
   return (
@@ -70,37 +70,17 @@ export default function Footer() {
             </span>{" "}
             EST. 2026
           </span>
-          <div className="mt-4 flex items-center gap-6">
-            <Image className="h-8 w-auto opacity-85" src={ieeeLogo} alt="IEEE Student Branch of UCSC" sizes="160px" />
-            <span aria-hidden="true" className="h-8 w-px bg-mint/20" />
-            <Image className="h-10 w-auto opacity-85" src={acmLogo} alt="ACM Student Chapter of UCSC" sizes="80px" />
+          <div className="mt-4 flex items-center justify-center gap-4 px-4 md:gap-6 md:px-0">
+            <Image className="h-5 w-auto opacity-85 sm:h-6 md:h-8" src={ieeeLogo} alt="IEEE Student Branch of UCSC" sizes="(max-width: 768px) 120px, 160px" />
+            <span aria-hidden="true" className="h-5 w-px bg-mint/20 sm:h-6 md:h-8" />
+            <Image className="h-8 w-auto opacity-85 sm:h-10 md:h-14" src={acmLogo} alt="ACM Student Chapter of UCSC" sizes="(max-width: 768px) 60px, 100px" />
           </div>
         </section>
 
         <nav
-          className="grid grid-cols-1 gap-8 pt-[0.4rem] sm:grid-cols-3 md:gap-[clamp(1.25rem,3vw,3rem)]"
+          className="flex flex-wrap justify-center gap-8 pt-[0.4rem] sm:justify-end md:gap-[clamp(2.5rem,5vw,5rem)]"
           aria-label="Footer navigation"
         >
-          <section className={LINK_GROUP} aria-labelledby="contact-heading">
-            <h2 className={LINK_HEADING} id="contact-heading">
-              CONTACT
-            </h2>
-            <ul className={LINK_LIST}>
-              <li>
-                <a className={LINK} href="mailto:info@reidxtreme.lk">
-                  info@reidxtreme.lk
-                </a>
-              </li>
-              <li>
-                <a
-                  className={LINK}
-                  href="mailto:info@reidxtreme.lk?subject=REID%20XTREME%20Help%20Desk"
-                >
-                  Help Desk
-                </a>
-              </li>
-            </ul>
-          </section>
 
           {SOCIALS.map((group) => (
             <section className={LINK_GROUP} aria-labelledby={`${group.id}-heading`} key={group.id}>

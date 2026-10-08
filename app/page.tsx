@@ -1,4 +1,5 @@
 import { Hero } from "@/components/hero/Hero";
+import { AboutSection } from "@/components/AboutSection";
 import { SiteNav } from "@/components/nav/SiteNav";
 import { Timeline } from "@/components/timeline/Timeline";
 import Footer from "@/components/Footer";
@@ -12,6 +13,7 @@ export default function Home() {
       <SiteNav />
       <main className="w-full">
         <Hero />
+        <AboutSection />
         <Timeline />
         <Prizes />
         <SponsorsSection />
