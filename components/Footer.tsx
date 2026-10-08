@@ -70,10 +70,10 @@ export default function Footer() {
             </span>{" "}
             EST. 2026
           </span>
-          <div className="mt-4 flex items-center gap-6">
-            <Image className="h-8 w-auto opacity-85" src={ieeeLogo} alt="IEEE Student Branch of UCSC" sizes="160px" />
-            <span aria-hidden="true" className="h-8 w-px bg-mint/20" />
-            <Image className="h-14 w-auto opacity-85" src={acmLogo} alt="ACM Student Chapter of UCSC" sizes="100px" />
+          <div className="mt-4 flex items-center justify-center gap-4 px-4 md:gap-6 md:px-0">
+            <Image className="h-5 w-auto opacity-85 sm:h-6 md:h-8" src={ieeeLogo} alt="IEEE Student Branch of UCSC" sizes="(max-width: 768px) 120px, 160px" />
+            <span aria-hidden="true" className="h-5 w-px bg-mint/20 sm:h-6 md:h-8" />
+            <Image className="h-8 w-auto opacity-85 sm:h-10 md:h-14" src={acmLogo} alt="ACM Student Chapter of UCSC" sizes="(max-width: 768px) 60px, 100px" />
           </div>
         </section>
 
