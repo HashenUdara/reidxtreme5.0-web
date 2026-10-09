@@ -25,7 +25,7 @@ export default function Home() {
               Ready to Cross the Chasm?
             </h2>
             <p className="mb-10 text-[clamp(1rem,2vw,1.15rem)] leading-relaxed text-muted">
-              Assemble your team, build what's next, and claim your share of the prize pool.
+              Assemble your team, take on the challenge, and compete for your share of the prize pool.
             </p>
             <Link
               href="/register"

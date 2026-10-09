@@ -65,10 +65,7 @@ export default function Footer() {
           />
           <span className="text-[0.62rem] font-medium tracking-[0.11em] text-muted">
             COLOMBO, SRI LANKA{" "}
-            <span aria-hidden="true" className="px-[0.35rem] text-emerald">
-              {"//"}
-            </span>{" "}
-            EST. 2026
+
           </span>
           <div className="mt-4 flex items-center justify-center gap-4 px-4 md:gap-6 md:px-0">
             <Image className="h-5 w-auto opacity-85 sm:h-6 md:h-8" src={ieeeLogo} alt="IEEE Student Branch of UCSC" sizes="(max-width: 768px) 120px, 160px" />

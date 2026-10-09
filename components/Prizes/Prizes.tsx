@@ -220,7 +220,7 @@ export default function Prizes() {
           id="prizes-title"
           eyebrow="Prize pool"
           title="What waits on the other side"
-          subtitle="Cross the gap. Build what's next. Claim your share."
+          subtitle="Cross the gap. Take on the challenge. Claim your share."
           className="mb-[clamp(2.5rem,6vw,5rem)]"
         />
 
