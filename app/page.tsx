@@ -18,7 +18,7 @@ export default function Home() {
         <AboutSection />
         <Timeline />
         <Prizes />
-        <SponsorsSection />
+        {/* <SponsorsSection /> */}
         <section className="relative isolate overflow-hidden py-[clamp(5rem,12vw,10rem)] text-center">
           <div className="relative z-1 mx-auto max-w-2xl px-6">
             <h2 className="mb-6 font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.98] font-bold uppercase tracking-[0.025em] text-white">
