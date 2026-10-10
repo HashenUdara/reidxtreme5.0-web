@@ -64,7 +64,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
             {/* Soft Radial Glow behind video */}
             <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,rgb(140_245_189/0.08)_0%,transparent_50%)]" />
             <video
-              src="/transition.webm"
+              src="/transition/transition.webm"
+              width={1920}
+              height={1080}
               autoPlay
               muted
               playsInline
