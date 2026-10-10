@@ -71,7 +71,10 @@ export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="relative isolate overflow-hidden py-[clamp(5rem,10vw,8rem)]">
+    <section
+      id="faq"
+      className="relative isolate overflow-hidden py-[clamp(5rem,10vw,8rem)]"
+    >
       <SectionHeader
         id="faq-heading"
         eyebrow="Got Questions?"

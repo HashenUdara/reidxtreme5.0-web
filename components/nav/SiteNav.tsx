@@ -12,9 +12,11 @@ import {
 import logo from "@/assets/Logo_no_shadow_glowing.png";
 
 const LINKS = [
+  { id: "about", label: "About" },
   { id: "timeline", label: "Timeline" },
   { id: "prizes", label: "Prizes" },
-  { id: "sponsors", label: "Sponsors" },
+  { id: "contact", label: "Contact" },
+  { id: "faq", label: "FAQ" },
 ];
 const REGISTER = { href: "/register", label: "Connect & Register" };
 const SECTION_IDS = LINKS.map((link) => link.id);
@@ -54,7 +56,7 @@ export function SiteNav() {
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    const desktop = window.matchMedia("(min-width: 768px)");
+    const desktop = window.matchMedia("(min-width: 1024px)");
     const onDesktop = () => desktop.matches && setOpen(false);
     window.addEventListener("keydown", onKey);
     desktop.addEventListener("change", onDesktop);
@@ -87,7 +89,7 @@ export function SiteNav() {
           />
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-10 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex xl:gap-10">
           {LINKS.map((link) => (
             <Link
               key={link.id}
@@ -109,7 +111,7 @@ export function SiteNav() {
           aria-controls="site-menu"
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
-          className="relative grid size-10 place-items-center rounded-md border border-line bg-bg/40 md:hidden"
+          className="relative grid size-10 place-items-center rounded-md border border-line bg-bg/40 lg:hidden"
         >
           <span
             aria-hidden
@@ -133,7 +135,7 @@ export function SiteNav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="border-t border-mint/10 md:hidden"
+            className="border-t border-mint/10 lg:hidden"
           >
             <div className="mx-auto flex w-[min(92%,var(--container-page))] flex-col gap-1 py-4">
               {LINKS.map((link) => (
