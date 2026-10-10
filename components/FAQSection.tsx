@@ -42,10 +42,15 @@ function FAQItem({ question, answer, isOpen, onClick }: { question: string, answ
         <span className={cx("font-display text-[clamp(1.1rem,2vw,1.25rem)] font-bold tracking-[0.05em] transition-colors duration-200 pr-6", isOpen ? "text-mint text-glow" : "text-white hover:text-mint")}>
           {question}
         </span>
-        <span className={cx("ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors duration-200 font-sans text-lg leading-none", isOpen ? "border-mint text-mint" : "border-muted text-muted")}>
-          <span className={cx("transition-transform duration-300", isOpen ? "rotate-45" : "")}>
-            +
-          </span>
+        <span className={cx("ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors duration-200", isOpen ? "border-mint text-mint" : "border-muted text-muted")}>
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            viewBox="0 0 12 12"
+            className={cx("block size-3 transition-transform duration-300", isOpen ? "rotate-45" : "")}
+          >
+            <path d="M6 1v10M1 6h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          </svg>
         </span>
       </button>
       <AnimatePresence>
