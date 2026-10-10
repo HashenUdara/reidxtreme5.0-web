@@ -31,7 +31,11 @@ const SOCIALS = [
     ],
   },
 ];
-const EXTERNAL = <span aria-hidden="true" className="text-[0.72rem] text-emerald">↗</span>;
+const EXTERNAL = (
+  <svg aria-hidden="true" viewBox="0 0 12 12" className="size-2.5 text-emerald" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 9l6-6M4 3h5v5" />
+  </svg>
+);
 
 export default function Footer() {
   return (
@@ -51,7 +55,8 @@ export default function Footer() {
         <span className="text-muted/70">RX—05 / 2026</span>
       </div>
 
-      <div className="mx-auto grid w-full max-w-page grid-cols-1 gap-11 px-6 py-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,2fr)] md:gap-[clamp(2.5rem,6vw,5rem)] md:py-[clamp(3rem,5vw,4rem)]">
+      {/* Same side padding as the bars, so all three rows share edges. */}
+      <div className="grid grid-cols-1 gap-11 px-[clamp(1.25rem,4vw,3.75rem)] py-12 max-sm:px-4 md:grid-cols-2 md:gap-[clamp(2.5rem,6vw,5rem)] md:py-[clamp(3rem,5vw,4rem)]">
         <section
           className="flex flex-col items-center gap-3 text-center md:items-start md:text-left"
           aria-label="ReidXTREME 5.0"
@@ -64,13 +69,12 @@ export default function Footer() {
             sizes="220px"
           />
           <span className="text-[0.62rem] font-medium tracking-[0.11em] text-muted">
-            COLOMBO, SRI LANKA{" "}
-
+            COLOMBO, SRI LANKA
           </span>
-          <div className="mt-4 flex items-center justify-center gap-4 px-4 md:gap-6 md:px-0">
-            <Image className="h-5 w-auto opacity-85 sm:h-6 md:h-8" src={ieeeLogo} alt="IEEE Student Branch of UCSC" sizes="(max-width: 768px) 120px, 160px" />
-            <span aria-hidden="true" className="h-5 w-px bg-mint/20 sm:h-6 md:h-8" />
-            <Image className="h-8 w-auto opacity-85 sm:h-10 md:h-14" src={acmLogo} alt="ACM Student Chapter of UCSC" sizes="(max-width: 768px) 60px, 100px" />
+          <div className="mt-4 flex items-center justify-center gap-4 md:justify-start lg:gap-6">
+            <Image className="h-5 w-auto opacity-85 sm:h-6 lg:h-8" src={ieeeLogo} alt="IEEE Student Branch of UCSC" sizes="(max-width: 1024px) 150px, 200px" />
+            <span aria-hidden="true" className="h-5 w-px bg-mint/20 sm:h-6 lg:h-8" />
+            <Image className="h-8 w-auto opacity-85 sm:h-10 lg:h-14" src={acmLogo} alt="ACM Student Chapter of UCSC" sizes="(max-width: 1024px) 80px, 110px" />
           </div>
         </section>
 
@@ -105,9 +109,9 @@ export default function Footer() {
           href="#top"
         >
           BACK TO TOP{" "}
-          <span aria-hidden="true" className="text-[0.9rem] text-mint">
-            ↑
-          </span>
+          <svg aria-hidden="true" viewBox="0 0 12 12" className="size-3 text-mint" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 10.5v-9M2 5.5l4-4 4 4" />
+          </svg>
         </a>
       </div>
     </footer>
