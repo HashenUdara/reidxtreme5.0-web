@@ -18,14 +18,14 @@ type Frame = {
 };
 
 const POSTER: Frame = {
-  landscape: { src: "/hero/poster.jpg", width: 1920, height: 1080 },
+  landscape: { src: "/hero/poster.webp", width: 1920, height: 1080 },
   portrait: { src: "/hero/poster-portrait.jpg", width: 810, height: 1080 },
 };
 
 // BG_5 cropped to the video's framing; it matches the final frame.
 const END: Frame = {
-  landscape: { src: "/hero/end.jpg", width: 2674, height: 1504 },
-  portrait: { src: "/hero/end-portrait.jpg", width: 1128, height: 1504 },
+  landscape: { src: "/hero/end.webp", width: 2674, height: 1504 },
+  portrait: { src: "/hero/end-portrait.webp", width: 1128, height: 1504 },
 };
 
 function CoverPicture({ frame, priority }: { frame: Frame; priority?: boolean }) {

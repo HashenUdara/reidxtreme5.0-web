@@ -1,7 +1,5 @@
 import Image from "next/image";
-import footerLogo from "@/assets/Logo_no_shadow_glowing.png";
-import acmLogo from "@/assets/ACM.png";
-import ieeeLogo from "@/assets/IEEE.png";
+import { ACM_LOGO, IEEE_LOGO, REID_LOGO } from "@/components/brand";
 import { cx } from "@/lib/cx";
 
 const BAR =
@@ -64,17 +62,17 @@ export default function Footer() {
           <Image
             className="block max-h-12 w-[min(100%,11.25rem)] object-contain object-center sm:max-h-16 sm:w-[min(100%,13.75rem)] md:object-left"
             id="footer-brand"
-            src={footerLogo}
+            {...REID_LOGO}
             alt="ReidXTREME 5.0"
             sizes="220px"
           />
           <span className="text-[0.62rem] font-medium tracking-[0.11em] text-muted">
             COLOMBO, SRI LANKA
           </span>
-          <div className="mt-4 flex items-center justify-center gap-4 md:justify-start lg:gap-6">
-            <Image className="h-5 w-auto opacity-85 sm:h-6 lg:h-8" src={ieeeLogo} alt="IEEE Student Branch of UCSC" sizes="(max-width: 1024px) 150px, 200px" />
-            <span aria-hidden="true" className="h-5 w-px bg-mint/20 sm:h-6 lg:h-8" />
-            <Image className="h-8 w-auto opacity-85 sm:h-10 lg:h-14" src={acmLogo} alt="ACM Student Chapter of UCSC" sizes="(max-width: 1024px) 80px, 110px" />
+          <div className="mt-4 flex items-center justify-center gap-4 px-4 md:gap-6 md:px-0">
+            <Image className="h-5 w-auto opacity-85 sm:h-6 md:h-8" {...IEEE_LOGO} alt="IEEE Student Branch of UCSC" sizes="(max-width: 768px) 120px, 160px" />
+            <span aria-hidden="true" className="h-5 w-px bg-mint/20 sm:h-6 md:h-8" />
+            <Image className="h-8 w-auto opacity-85 sm:h-10 md:h-14" {...ACM_LOGO} alt="ACM Student Chapter of UCSC" sizes="(max-width: 768px) 60px, 100px" />
           </div>
         </section>
 
