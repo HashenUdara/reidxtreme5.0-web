@@ -19,10 +19,10 @@ export const FRAME_WIDTH = 2644;
 export const MIRROR_DX = -372;
 export const MIRROR_DY = 1675;
 
-export const SPAN: Piece = { src: "/timeline/span.png", x: 37, y: 6, w: 2179, h: 1692, width: 1634, height: 1269 };
-export const SPAN_START: Piece = { src: "/timeline/span-start.png", x: 6, y: 5, w: 516, h: 967, width: 387, height: 725 };
-export const SPAN_END: Piece = { src: "/timeline/span-end.png", x: 1752, y: 1209, w: 514, h: 492, width: 386, height: 369 };
-export const CONNECTOR: Piece = { src: "/timeline/connector.png", x: 1750, y: 1209, w: 891, h: 1438, width: 668, height: 1079 };
+export const SPAN: Piece = { src: "/timeline/span.avif", x: 37, y: 6, w: 2179, h: 1692, width: 1634, height: 1269 };
+export const SPAN_START: Piece = { src: "/timeline/span-start.avif", x: 6, y: 5, w: 516, h: 967, width: 387, height: 725 };
+export const SPAN_END: Piece = { src: "/timeline/span-end.avif", x: 1752, y: 1209, w: 514, h: 492, width: 386, height: 369 };
+export const CONNECTOR: Piece = { src: "/timeline/connector.avif", x: 1750, y: 1209, w: 891, h: 1438, width: 668, height: 1079 };
 
 /** Span silhouette as [x, y] points, for hover hit areas. */
 export const SPAN_OUTLINE: [number, number][] = [[24,580],[72,570],[120,546],[168,490],[216,348],[264,136],[312,135],[360,129],[408,98],[456,79],[504,144],[552,234],[600,320],[648,399],[696,470],[744,537],[792,595],[840,648],[888,697],[936,740],[984,779],[1032,809],[1080,835],[1128,857],[1176,876],[1224,888],[1272,896],[1320,893],[1368,884],[1416,866],[1464,849],[1512,783],[1560,787],[1608,766],[1656,727],[1704,725],[1752,851],[1800,962],[1848,1055],[1896,1136],[1944,1206],[1992,1268],[2040,1321],[2088,1369],[2136,1402],[2184,1478],[2184,1523],[2136,1549],[2088,1569],[2040,1591],[1992,1662],[1944,1662],[1896,1633],[1848,1604],[1800,1574],[1752,1546],[1704,1532],[1656,1528],[1608,1500],[1560,1649],[1512,1657],[1464,1641],[1416,1367],[1368,1333],[1320,1302],[1272,1275],[1224,1249],[1176,1224],[1128,1200],[1080,1176],[1032,1152],[984,1128],[936,1104],[888,1080],[840,1059],[792,1033],[744,1010],[696,989],[648,967],[600,949],[552,925],[504,975],[456,982],[408,962],[360,859],[312,1070],[264,1073],[216,1049],[168,805],[120,782],[72,767],[24,744]];

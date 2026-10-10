@@ -11,7 +11,7 @@
 // same pixels as the caps it meets, so the timeline swaps caps for connector
 // and the join never shows two copies of the deck end.
 //
-// Outputs: public/timeline/*.png and components/timeline/bridgeGeometry.ts.
+// Outputs: public/timeline/*.avif and components/timeline/bridgeGeometry.ts.
 // All geometry is in source pixels of bridge_disconnected.jpg.
 
 import { mkdirSync, writeFileSync } from "node:fs";
@@ -158,9 +158,9 @@ async function writePiece(name, rgb, alpha, rect) {
   const height = Math.round(rect.h * EXPORT_SCALE);
   await sharp(pixels, { raw: { width: rect.w, height: rect.h, channels: 4 } })
     .resize(width, height, { kernel: "lanczos3" })
-    .png({ compressionLevel: 9, palette: false })
-    .toFile(join(OUT_DIR, `${name}.png`));
-  return { src: `/timeline/${name}.png`, ...rect, width, height };
+    .avif({ quality: 70, effort: 7 })
+    .toFile(join(OUT_DIR, `${name}.avif`));
+  return { src: `/timeline/${name}.avif`, ...rect, width, height };
 }
 
 const pieces = {
