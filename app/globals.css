@@ -100,6 +100,14 @@
   }
 }
 
+/* A horizontal rule drawing out from its transform origin. */
+@keyframes draw-deck {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+}
+
 /* For SVG strokes with pathLength="1" and stroke-dasharray: 1. */
 @keyframes draw-line {
   from {
