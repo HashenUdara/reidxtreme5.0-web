@@ -9,7 +9,7 @@ import {
   useMotionValueEvent,
   useScroll,
 } from "motion/react";
-import logo from "@/assets/Logo_no_shadow_glowing.png";
+import { REID_LOGO } from "@/components/brand";
 
 const LINKS = [
   { id: "about", label: "About" },
@@ -81,7 +81,7 @@ export function SiteNav() {
       <div className="mx-auto flex h-(--nav-h) w-[min(92%,var(--container-page))] items-center justify-between">
         <Link href="/" className="-m-1 rounded-sm p-1">
           <Image
-            src={logo}
+            {...REID_LOGO}
             alt="REID XTREME 5.0"
             className="h-10 w-auto md:h-12"
             sizes="80px"
