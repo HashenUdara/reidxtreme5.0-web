@@ -77,6 +77,13 @@ const CORNERS = [
   "bottom-[0.6rem] right-[0.6rem] border-b border-r",
 ];
 
+// Podium heights: 1st stands tallest, then 2nd, then 3rd, all on one baseline.
+const CARD_HEIGHT: Record<Prize["place"], string> = {
+  1: "min-h-64 md:min-h-80",
+  2: "min-h-56 md:min-h-70",
+  3: "min-h-56 md:min-h-62",
+};
+
 function Medal({ place, build }: { place: Prize["place"]; build: boolean }) {
   const line = cx(
     "fill-none stroke-current stroke-[1.5] [stroke-dasharray:1] [stroke-linecap:round] [stroke-linejoin:round]",
@@ -85,7 +92,10 @@ function Medal({ place, build }: { place: Prize["place"]; build: boolean }) {
   return (
     <svg
       aria-hidden="true"
-      className="relative z-1 block h-20 w-16 overflow-visible text-mint"
+      className={cx(
+        "relative z-1 block overflow-visible text-mint",
+        place === 1 ? "h-24 w-[4.8rem]" : "h-20 w-16",
+      )}
       focusable="false"
       viewBox="0 0 64 80"
     >
@@ -142,16 +152,15 @@ function PrizeCard({ prize, isVisible, hasMounted, reducedMotion }: PrizeCardPro
     <article
       aria-label={`${prize.label}: ${prize.amount.toLocaleString("en-US")} LKR`}
       className={cx(
-        "relative flex min-w-0 flex-col items-center justify-center overflow-hidden rounded-lg border border-transparent px-[0.85rem] py-[clamp(1.1rem,2vw,1.75rem)] text-center backdrop-blur-md",
+        "relative flex min-w-0 flex-col items-center justify-center overflow-hidden rounded-lg border border-transparent px-6 py-[clamp(1.5rem,3vw,2.25rem)] text-center backdrop-blur-md",
+        CARD_HEIGHT[prize.place],
         "transition-[box-shadow,transform] duration-300 ease-standard motion-reduce:transition-none",
         "hover:-translate-y-[3px] hover:shadow-[0_0_14px_rgb(140_245_189/0.25)] focus-visible:-translate-y-[3px] focus-visible:shadow-[0_0_14px_rgb(140_245_189/0.25)]",
         // Glass panel (§13), drawn behind the content so it can fade in on its own.
         "before:pointer-events-none before:absolute before:inset-0 before:z-0 before:rounded-[inherit] before:border before:bg-panel before:transition-colors before:duration-300 hover:before:border-mint focus-visible:before:border-mint",
         // Mint light that follows the cursor.
         "after:pointer-events-none after:absolute after:inset-0 after:z-0 after:bg-[radial-gradient(260px_circle_at_var(--mx,50%)_var(--my,50%),rgb(140_245_189/0.16),transparent_70%)] after:opacity-0 after:transition-opacity after:duration-300 hover:after:opacity-100 focus-visible:after:opacity-100 motion-reduce:after:hidden",
-        first
-          ? "soft-glow min-h-64 before:border-mint/65 max-md:order-first md:min-h-76 md:-translate-y-5 md:rounded-xl md:hover:-translate-y-[calc(1.25rem+3px)] md:focus-visible:-translate-y-[calc(1.25rem+3px)]"
-          : "min-h-56 before:border-line md:min-h-64",
+        first ? "soft-glow before:border-mint/65 max-md:order-first md:rounded-xl" : "before:border-line",
         waiting && "invisible opacity-0",
         build && BUILD.panel,
       )}
@@ -179,10 +188,11 @@ function PrizeCard({ prize, isVisible, hasMounted, reducedMotion }: PrizeCardPro
       </p>
       <p
         className={cx(
-          "relative z-1 mt-[0.55rem] font-display leading-none font-bold tracking-[0.015em] whitespace-nowrap text-mint tabular-nums text-glow",
+          "relative z-1 mt-[0.55rem] font-display leading-none font-bold tracking-[0.015em] whitespace-nowrap text-mint tabular-nums",
+          // One strong glow, on the top prize (§7).
           first
-            ? "text-[clamp(3rem,12vw,3.75rem)] md:text-[clamp(3.25rem,5.5vw,4.75rem)]"
-            : "text-[clamp(2.5rem,5vw,3.75rem)]",
+            ? "text-glow text-[clamp(3rem,12vw,3.75rem)] md:text-[clamp(3.5rem,5.5vw,4.75rem)]"
+            : "text-[clamp(2.5rem,5vw,3.5rem)]",
           build && BUILD.amount,
         )}
       >
@@ -209,23 +219,23 @@ export default function Prizes() {
   const isVisible = useInView(sectionRef, { once: true, amount: 0.25 });
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-5 py-16 md:px-6 md:py-[clamp(3rem,8vw,7rem)]">
-      <section
-        id="prizes"
-        aria-labelledby="prizes-title"
-        className="mx-auto w-full max-w-page"
-        ref={sectionRef}
-      >
-        <SectionHeader
-          id="prizes-title"
-          eyebrow="Prize pool"
-          title="What waits on the other side"
-          subtitle="Cross the gap. Take on the challenge. Claim your share."
-          className="mb-[clamp(2.5rem,6vw,5rem)]"
-        />
+    <section
+      id="prizes"
+      aria-labelledby="prizes-title"
+      className="px-6 py-[clamp(5rem,10vw,8rem)]"
+      ref={sectionRef}
+    >
+      <SectionHeader
+        id="prizes-title"
+        eyebrow="Prize pool"
+        title="What waits on the other side"
+        subtitle="Cross the gap. Take on the challenge. Claim your share."
+        className="mb-[clamp(2.5rem,5vw,4rem)]"
+      />
 
+      <div className="mx-auto max-w-sm md:max-w-5xl">
         {/* Podium order: 2nd, 1st, 3rd. On phones 1st moves to the top. */}
-        <div className="mx-auto grid max-w-lg grid-cols-1 gap-4 md:max-w-none md:grid-cols-3 md:items-end md:gap-[clamp(1rem,2.4vw,2rem)]">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:items-end md:gap-[clamp(1rem,2.4vw,1.75rem)] md:px-8">
           {PRIZES.map((prize) => (
             <PrizeCard
               hasMounted={hasMounted}
@@ -236,7 +246,7 @@ export default function Prizes() {
             />
           ))}
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }
